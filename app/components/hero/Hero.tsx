@@ -13,7 +13,10 @@ export function Hero() {
   ];
 
   return (
-    <section className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden">
+    <section 
+      className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
+      aria-label="Hero section - Introduction"
+    >
         <LiquidEther />
         
         {/* Main Content */}
@@ -24,11 +27,15 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-[hsl(var(--card))]/80 backdrop-blur-sm border border-[hsl(var(--border))] shadow-lg"
+            role="status"
+            aria-label="Currently available for freelance work"
           >
-            <Sparkles className="w-3 md:w-4 h-3 md:h-4 text-[var(--secondary)]" />
+            <Sparkles className="w-3 md:w-4 h-3 md:h-4 text-[var(--secondary)]" aria-hidden="true" />
             <span className="text-xs md:text-sm font-medium text-[hsl(var(--foreground))]">Available for freelance work</span>
           </motion.div>
 
+          <h1 className="sr-only">Jammazi Khalil - Full-Stack Developer Portfolio</h1>
+          
           <BlurText
             text="Welcome to My Portfolio"
             delay={150}
@@ -65,6 +72,8 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
             className="flex gap-6 sm:gap-8 mt-8 md:mt-12 flex-wrap justify-center"
+            role="region"
+            aria-label="Professional statistics"
           >
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
@@ -86,13 +95,21 @@ export function Hero() {
           transition={{ delay: 1, duration: 0.6 }}
           className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
           onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+          role="button"
+          aria-label="Scroll down to view more content"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+            }
+          }}
         >
           <span className="text-xs md:text-sm text-[hsl(var(--muted-foreground))]">Scroll to explore</span>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            <ArrowDown className="w-4 md:w-5 h-4 md:h-5 text-[hsl(var(--muted-foreground))]" />
+            <ArrowDown className="w-4 md:w-5 h-4 md:h-5 text-[hsl(var(--muted-foreground))]" aria-hidden="true" />
           </motion.div>
         </motion.div>
 
@@ -104,6 +121,7 @@ export function Hero() {
           }}
           transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
           className="hidden md:block absolute top-1/4 left-[10%] opacity-20"
+          aria-hidden="true"
         >
           <Code2 className="w-12 lg:w-16 h-12 lg:h-16 text-[var(--secondary)]" />
         </motion.div>
@@ -115,6 +133,7 @@ export function Hero() {
           }}
           transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
           className="hidden md:block absolute bottom-1/4 right-[10%] opacity-20"
+          aria-hidden="true"
         >
           <Code2 className="w-16 lg:w-20 h-16 lg:h-20 text-[hsl(var(--primary))]" />
         </motion.div>

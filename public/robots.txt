@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# Disallow admin or private routes if any
+# Disallow: /admin/
+# Disallow: /api/
+
+# Host
+Host: https://jammazikhalil.com
+
+# Sitemaps
+Sitemap: https://jammazikhalil.com/sitemap.xml
