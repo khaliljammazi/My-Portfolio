@@ -7,7 +7,7 @@ Allow: /
 # Disallow: /api/
 
 # Host
-Host: https://jammazikhalil.com
+Host: https://khalil-jammazi.vercel.app
 
 # Sitemaps
-Sitemap: https://jammazikhalil.com/sitemap.xml
+Sitemap: https://khalil-jammazi.vercel.app/sitemap.xml

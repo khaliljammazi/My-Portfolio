@@ -2,8 +2,8 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Jammazi Khalil",
-  "url": "https://jammazikhalil.com",
-  "image": "https://jammazikhalil.com/img/avatar.jpg",
+  "url": "https://khalil-jammazi.vercel.app",
+  "image": "https://khalil-jammazi.vercel.app/img/avatar.jpg",
   "sameAs": [
     "https://github.com/khaliljammazi",
     "https://linkedin.com/in/jammazikhalil",

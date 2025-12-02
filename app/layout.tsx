@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jammazikhalil.com'),
+  metadataBase: new URL('https://khalil-jammazi.vercel.app'),
   title: {
     default: "Jammazi Khalil | Full-Stack Developer & Software Engineer",
     template: "%s | Jammazi Khalil"
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jammazikhalil.com",
+    url: "https://khalil-jammazi.vercel.app",
     title: "Jammazi Khalil | Full-Stack Developer & Software Engineer",
     description: "Passionate full-stack developer specializing in React, Next.js, Vue.js, and modern web technologies. Building scalable applications with clean, maintainable code.",
     siteName: "Jammazi Khalil Portfolio",
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     creator: "@jammazikhalil",
   },
   alternates: {
-    canonical: "https://jammazikhalil.com",
+    canonical: "https://khalil-jammazi.vercel.app",
   },
   verification: {
     google: "your-google-verification-code",
@@ -109,8 +109,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Jammazi Khalil",
-              "url": "https://jammazikhalil.com",
-              "image": "https://jammazikhalil.com/img/avatar.jpg",
+              "url": "https://khalil-jammazi.vercel.app",
+              "image": "https://khalil-jammazi.vercel.app/img/avatar.jpg",
               "sameAs": [
                 "https://github.com/khaliljammazi",
                 "https://linkedin.com/in/jammazikhalil",
