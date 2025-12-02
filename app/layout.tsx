@@ -5,6 +5,8 @@ import { PillNav } from "./components/PillNav";
 import { ChatBot } from "./components/ChatBot";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { MusicPlayer } from "./components/MusicPlayer";
+import { MusicProvider } from "./context/MusicContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -131,10 +133,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <PillNav />
-          {children}
-          <Footer />
-          <ChatBot />
+          <MusicProvider>
+            <PillNav />
+            {children}
+            <Footer />
+            <ChatBot />
+            <MusicPlayer />
+          </MusicProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import * as THREE from "three";
+import { useMusicContext } from "../context/MusicContext";
 
 interface Robot3DProps {
   cursorPosition: { x: number; y: number };
@@ -12,6 +13,8 @@ interface Robot3DProps {
 export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();
+  const { isPlaying } = useMusicContext();
+  const isPlayingRef = useRef(isPlaying);
   const sceneRef = useRef<{
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
@@ -22,6 +25,8 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
       leftEye: THREE.Mesh;
       rightEye: THREE.Mesh;
       antenna: THREE.Mesh;
+      leftArm: THREE.Mesh;
+      rightArm: THREE.Mesh;
     };
     materials: {
       body: THREE.MeshStandardMaterial;
@@ -30,6 +35,11 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
       antenna: THREE.MeshStandardMaterial;
     };
   } | null>(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -146,7 +156,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
       scene,
       camera,
       renderer,
-      robot: { head, body, leftEye, rightEye, antenna },
+      robot: { head, body, leftEye, rightEye, antenna, leftArm, rightArm },
       materials: {
         body: bodyMaterial,
         head: headMaterial,
@@ -159,21 +169,67 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Gentle floating animation
       const time = Date.now() * 0.001;
-      body.position.y = -0.5 + Math.sin(time * 2) * 0.1;
-      head.position.y = 0.7 + Math.sin(time * 2) * 0.1;
-      leftArm.position.y = -0.3 + Math.sin(time * 2) * 0.05;
-      rightArm.position.y = -0.3 + Math.sin(time * 2) * 0.05;
+      const isMusicPlaying = isPlayingRef.current;
 
-      // Rotate antenna ball
-      ball.rotation.y += 0.02;
+      if (isMusicPlaying) {
+        // DANCING MODE! 🕺
+        const danceSpeed = 8; // Faster movement
+        const bounceHeight = 0.2;
+        const wiggleAmount = 0.3;
+        
+        // Body bouncing and wiggling
+        body.position.y = -0.5 + Math.abs(Math.sin(time * danceSpeed)) * bounceHeight;
+        body.rotation.z = Math.sin(time * danceSpeed * 0.5) * wiggleAmount * 0.3;
+        body.rotation.y = Math.sin(time * danceSpeed * 0.25) * wiggleAmount * 0.2;
+        
+        // Head bobbing and grooving
+        head.position.y = 0.7 + Math.abs(Math.sin(time * danceSpeed)) * bounceHeight;
+        head.rotation.z = Math.sin(time * danceSpeed * 0.5 + 0.5) * wiggleAmount * 0.4;
+        
+        // Arms dancing! Wave them around
+        leftArm.position.y = -0.3 + Math.sin(time * danceSpeed) * 0.3;
+        leftArm.rotation.z = 0.3 + Math.sin(time * danceSpeed) * 0.8;
+        leftArm.rotation.x = Math.sin(time * danceSpeed * 0.5) * 0.4;
+        
+        rightArm.position.y = -0.3 + Math.sin(time * danceSpeed + Math.PI) * 0.3;
+        rightArm.rotation.z = -0.3 + Math.sin(time * danceSpeed + Math.PI) * -0.8;
+        rightArm.rotation.x = Math.sin(time * danceSpeed * 0.5 + Math.PI) * 0.4;
 
-      // Eye glow pulsing
-      const glowIntensity = 0.5 + Math.sin(time * 3) * 0.2;
-      if (leftEye.material instanceof THREE.MeshStandardMaterial) {
-        leftEye.material.emissiveIntensity = glowIntensity;
-        rightEye.material.emissiveIntensity = glowIntensity;
+        // Faster antenna spin
+        ball.rotation.y += 0.15;
+        
+        // Crazy eye glow
+        const glowIntensity = 0.8 + Math.sin(time * danceSpeed * 2) * 0.4;
+        if (leftEye.material instanceof THREE.MeshStandardMaterial) {
+          leftEye.material.emissiveIntensity = glowIntensity;
+          rightEye.material.emissiveIntensity = glowIntensity;
+        }
+      } else {
+        // Normal gentle floating animation
+        body.position.y = -0.5 + Math.sin(time * 2) * 0.1;
+        body.rotation.z = 0;
+        body.rotation.y = 0;
+        
+        head.position.y = 0.7 + Math.sin(time * 2) * 0.1;
+        
+        leftArm.position.y = -0.3 + Math.sin(time * 2) * 0.05;
+        leftArm.rotation.z = 0.3;
+        leftArm.rotation.x = 0;
+        
+        rightArm.position.y = -0.3 + Math.sin(time * 2) * 0.05;
+        rightArm.rotation.z = -0.3;
+        rightArm.rotation.x = 0;
+
+        // Normal antenna spin
+        ball.rotation.y += 0.02;
+
+        // Normal eye glow pulsing
+        const glowIntensity = 0.5 + Math.sin(time * 3) * 0.2;
+        if (leftEye.material instanceof THREE.MeshStandardMaterial) {
+          leftEye.material.emissiveIntensity = glowIntensity;
+          rightEye.material.emissiveIntensity = glowIntensity;
+        }
       }
 
       renderer.render(scene, camera);

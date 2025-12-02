@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import './hero.css';
+import { useMusicContext } from '../../context/MusicContext';
 
 export interface LiquidEtherProps {
   mouseForce?: number;
@@ -76,6 +77,7 @@ export default function LiquidEther({
   autoResumeDelay = 1000,
   autoRampDuration = 0.6
 }: LiquidEtherProps): React.ReactElement {
+  const { isPlaying } = useMusicContext();
   const mountRef = useRef<HTMLDivElement | null>(null);
   const webglRef = useRef<LiquidEtherWebGL | null>(null);
   const resizeObserverRef = useRef<ResizeObserver | null>(null);
@@ -83,6 +85,11 @@ export default function LiquidEther({
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null);
   const isVisibleRef = useRef<boolean>(true);
   const resizeRafRef = useRef<number | null>(null);
+
+  // Boost animation significantly when music is playing
+  const effectiveAutoSpeed = isPlaying ? 3.0 : autoSpeed;
+  const effectiveAutoIntensity = isPlaying ? 8.0 : autoIntensity;
+  const effectiveMouseForce = isPlaying ? mouseForce * 3 : mouseForce;
 
   useEffect(() => {
     if (!mountRef.current) return;
@@ -1191,6 +1198,24 @@ export default function LiquidEther({
     autoRampDuration
   ]);
 
+  // Separate effect for music-reactive animation updates
+  useEffect(() => {
+    const webgl = webglRef.current;
+    if (!webgl || !webgl.autoDriver) return;
+    
+    // Update speed and intensity based on music state
+    webgl.autoDriver.speed = effectiveAutoSpeed;
+    if (webgl.autoDriver.mouse) {
+      webgl.autoDriver.mouse.autoIntensity = effectiveAutoIntensity;
+    }
+    
+    // Also update simulation options for mouse force
+    const sim = webgl.output?.simulation;
+    if (sim) {
+      sim.options.mouse_force = effectiveMouseForce;
+    }
+  }, [isPlaying, effectiveAutoSpeed, effectiveAutoIntensity, effectiveMouseForce]);
+
   useEffect(() => {
     const webgl = webglRef.current;
     if (!webgl) return;
@@ -1198,7 +1223,7 @@ export default function LiquidEther({
     if (!sim) return;
     const prevRes = sim.options.resolution;
     Object.assign(sim.options, {
-      mouse_force: mouseForce,
+      mouse_force: effectiveMouseForce,
       cursor_size: cursorSize,
       isViscous,
       viscous,
@@ -1211,17 +1236,18 @@ export default function LiquidEther({
     });
     if (webgl.autoDriver) {
       webgl.autoDriver.enabled = autoDemo;
-      webgl.autoDriver.speed = autoSpeed;
+      webgl.autoDriver.speed = effectiveAutoSpeed;
       webgl.autoDriver.resumeDelay = autoResumeDelay;
       webgl.autoDriver.rampDurationMs = autoRampDuration * 1000;
       if (webgl.autoDriver.mouse) {
-        webgl.autoDriver.mouse.autoIntensity = autoIntensity;
+        webgl.autoDriver.mouse.autoIntensity = effectiveAutoIntensity;
         webgl.autoDriver.mouse.takeoverDuration = takeoverDuration;
       }
     }
     if (resolution !== prevRes) sim.resize();
   }, [
     mouseForce,
+    effectiveMouseForce,
     cursorSize,
     isViscous,
     viscous,
@@ -1236,7 +1262,10 @@ export default function LiquidEther({
     autoIntensity,
     takeoverDuration,
     autoResumeDelay,
-    autoRampDuration
+    autoRampDuration,
+    isPlaying,
+    effectiveAutoSpeed,
+    effectiveAutoIntensity
   ]);
 
   return <div ref={mountRef} className={`liquid-ether-container ${className || ''}`} style={style} />;
