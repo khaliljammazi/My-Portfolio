@@ -24,6 +24,17 @@ export const projects: Project[] = [
     liveUrl: "https://www.iam.ma",
     featured: true,
   },
+  {
+    slug: "threejs-3d-landing-page",
+    title: "Three.js 3D Landing Page",
+    shortDescription: "Landing page 3D interactive of iphone 17 pro max ",
+    description: "Developed an interactive 3D landing page using Three.js to showcase the features of the iPhone 17 Pro Max. The page includes smooth animations, responsive design, and engaging user interactions to enhance the overall user experience.",
+    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop&q=80",
+    tags: ["Three.js", "JavaScript", "WebGL"],
+    year: "2024",
+    liveUrl: "https://landing-page-mt.vercel.app",
+    featured: true
+  },
     {
     slug: "e-commerce-platform",
     title: "E-Commerce Platform",
