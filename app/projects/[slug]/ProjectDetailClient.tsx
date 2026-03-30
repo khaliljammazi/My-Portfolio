@@ -10,7 +10,7 @@ type Props = { project: Project; nextProject: Project };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay, ease: "easeOut" } }),
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 };
 
 export default function ProjectDetailClient({ project, nextProject }: Props) {
@@ -94,7 +94,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              custom={0}
+              transition={{ delay: 0 }}
             >
               <h2 className="text-xl md:text-2xl font-bold text-[hsl(var(--foreground))] mb-4">
                 Overview
@@ -111,7 +111,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                custom={0.05}
+                transition={{ delay: 0.05 }}
               >
                 <h2 className="text-xl md:text-2xl font-bold text-[hsl(var(--foreground))] mb-6">
                   Key Highlights
@@ -140,7 +140,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              custom={0.1}
+              transition={{ delay: 0.1 }}
             >
               <h2 className="text-xl md:text-2xl font-bold text-[hsl(var(--foreground))] mb-6">
                 Tech Stack
@@ -163,7 +163,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              custom={0.15}
+              transition={{ delay: 0.15 }}
               className="flex flex-wrap gap-4 pt-2"
             >
               {project.liveUrl && (
@@ -197,7 +197,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            custom={0.2}
+            transition={{ delay: 0.2 }}
             className="space-y-4"
           >
             <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-6 space-y-5 sticky top-28">
@@ -262,7 +262,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          custom={0}
+          transition={{ delay: 0 }}
           className="mt-20 md:mt-28 pt-8 border-t border-[hsl(var(--border))]"
         >
           <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4 uppercase tracking-wider font-medium">
