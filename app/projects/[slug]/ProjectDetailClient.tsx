@@ -10,7 +10,7 @@ type Props = { project: Project; nextProject: Project };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  show: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay, ease: [0.25, 0.46, 0.45, 0.94] } }),
+  show: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.55, delay, ease: "easeOut" } }),
 };
 
 export default function ProjectDetailClient({ project, nextProject }: Props) {
