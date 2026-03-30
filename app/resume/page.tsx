@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Download, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { PrintButton } from "./PrintButton";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -54,12 +55,7 @@ export default function ResumePage() {
 
         {/* Download + print bar */}
         <div className="flex justify-end gap-3 mb-8 print:hidden">
-          <button
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[hsl(var(--card))] border border-[hsl(var(--border))] text-sm font-medium hover:border-[var(--secondary)] hover:text-[var(--secondary)] transition-all"
-          >
-            Print / Save PDF
-          </button>
+          <PrintButton />
           <a
             href="/resume.pdf"
             download
