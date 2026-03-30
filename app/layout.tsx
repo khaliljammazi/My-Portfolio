@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { MusicPlayer } from "./components/MusicPlayer";
 import { MusicProvider } from "./context/MusicContext";
+import { LoadingScreen } from "./components/LoadingScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -132,6 +133,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <MusicProvider>
+            <LoadingScreen />
             <PillNav />
             {children}
             <Footer />

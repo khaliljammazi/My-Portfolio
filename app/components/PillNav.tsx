@@ -182,10 +182,8 @@ export function PillNav() {
 
             <div className="ml-4 md:ml-10 flex items-center gap-3 md:gap-4">
               <ThemeToggle />
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/resume"
                 className={cn(
                   "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
                   "bg-primary text-primary-foreground hover:bg-primary/90",
@@ -194,7 +192,7 @@ export function PillNav() {
                 )}
               >
                 Resume
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -237,14 +235,13 @@ export function PillNav() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/resume"
+              onClick={() => setMobileOpen(false)}
               className="inline-flex items-center justify-center rounded-md font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-11 md:h-12 px-6 md:px-8 text-base md:text-lg"
             >
               Resume
-            </a>
+            </Link>
           </div>
         </motion.div>
       )}
