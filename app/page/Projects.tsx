@@ -53,6 +53,15 @@ export default function Projects() {
     });
   };
 
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") paginate(-1);
+      if (e.key === "ArrowRight") paginate(1);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
   return (
     <section ref={sectionRef} id="projects" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden min-h-screen flex items-center">
       {/* Background decoration with parallax */}
@@ -74,7 +83,7 @@ export default function Projects() {
           className="text-center mb-10 md:mb-20"
         >
           <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
-            See my work
+            My Projects
           </h2>
         </motion.div>
 
@@ -96,32 +105,45 @@ export default function Projects() {
               className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center"
             >
               {/* Left: Project Image */}
-              <motion.div 
-                className="relative aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden border border-[hsl(var(--border))] md:border-2 shadow-xl md:shadow-2xl group"
-                style={{ scale: imageScale }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src={currentProject.image}
-                  alt={currentProject.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.div>
+              <Link href={`/projects/${currentProject.slug}`}>
+                <motion.div
+                  className="relative aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden border border-[hsl(var(--border))] md:border-2 shadow-xl md:shadow-2xl group cursor-pointer"
+                  style={{ scale: imageScale }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Image
+                    src={currentProject.image}
+                    alt={currentProject.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {/* View Details label */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-semibold">
+                      View Details →
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
 
               {/* Right: Project Info */}
               <motion.div className="space-y-4 md:space-y-6" style={{ y: textY }}>
                 <div>
-                  <motion.h3 
-                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]"
+                  <motion.h3
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                   >
-                    {currentProject.title}
+                    <Link
+                      href={`/projects/${currentProject.slug}`}
+                      className="text-[hsl(var(--foreground))] hover:text-[var(--secondary)] transition-colors duration-200"
+                    >
+                      {currentProject.title}
+                    </Link>
                   </motion.h3>
                   
                   <motion.p 
@@ -156,27 +178,35 @@ export default function Projects() {
                 </motion.div>
 
                 {/* Links */}
-                <motion.div 
-                  className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4"
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 md:pt-4 flex-wrap"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
+                  <Link
+                    href={`/projects/${currentProject.slug}`}
+                    className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 active:scale-95 transition-all shadow-lg text-sm md:text-base font-medium"
+                  >
+                    View Details
+                  </Link>
                   {currentProject.githubUrl && (
                     <Link
                       href={currentProject.githubUrl}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] hover:bg-[var(--secondary)]/10 transition-all hover:scale-105 text-sm md:text-base"
                     >
                       <Github className="w-4 md:w-5 h-4 md:h-5" />
-                      <span className="font-medium">Github</span>
+                      <span className="font-medium">GitHub</span>
                     </Link>
                   )}
                   {currentProject.liveUrl && (
                     <Link
                       href={currentProject.liveUrl}
                       target="_blank"
-                      className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-all shadow-lg text-sm md:text-base"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] hover:bg-[var(--secondary)]/10 transition-all hover:scale-105 text-sm md:text-base"
                     >
                       <ExternalLink className="w-4 md:w-5 h-4 md:h-5" />
                       <span className="font-medium">Live Demo</span>

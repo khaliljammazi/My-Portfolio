@@ -1,8 +1,37 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+
+function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+    let startTime: number | null = null;
+    const duration = 1600;
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [isInView, target]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+const portfolioStats = [
+  { label: "Years Experience", value: 3, suffix: "+" },
+  { label: "Projects Delivered", value: 20, suffix: "+" },
+  { label: "Technologies", value: 15, suffix: "" },
+  { label: "Happy Clients", value: 10, suffix: "+" },
+];
 
 const techStack = [
   { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
@@ -79,7 +108,7 @@ export function AboutSection() {
             About Me
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto leading-relaxed px-4">
-            I'm <span className="text-[var(--secondary)] font-semibold">Jammazi khalil</span>, 
+            I'm <span className="text-[var(--secondary)] font-semibold">Khalil Jammazi</span>,
             a passionate software developer specializing in building modern web applications. 
             I love turning complex problems into simple, beautiful, and intuitive solutions.
           </p>
@@ -104,13 +133,35 @@ export function AboutSection() {
           </div>
 
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">💡 My Approach</h3>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">🛠️ Tech Stack</h3>
             <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
-              I believe in continuous learning and staying up-to-date with the latest technologies. 
-              My workflow emphasizes collaboration, attention to detail, and creating solutions 
-              that not only work but delight users.
+              I work with modern technologies including React, Next.js, TypeScript, Node.js, 
+              and various databases. I'm always learning and adapting to new tools and frameworks.
             </p>
           </div>
+        </motion.div>
+
+        {/* Animated Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 md:mb-20"
+        >
+          {portfolioStats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl p-4 md:p-6 text-center hover:border-[var(--secondary)] transition-colors group"
+            >
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent mb-1">
+                <Counter target={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="text-xs md:text-sm text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--foreground))] transition-colors">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </motion.div>
 
         {/* Tech Stack Title */}
@@ -122,10 +173,10 @@ export function AboutSection() {
           className="text-center mb-8 md:mb-12"
         >
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--foreground))] mb-2">
-            Technologies I Work With
+            Technologies
           </h3>
           <p className="text-sm md:text-base text-[hsl(var(--muted-foreground))]">
-            Tools and frameworks I use to build great products
+            Tools and Frameworks I work with
           </p>
         </motion.div>
 

@@ -30,6 +30,7 @@ export function PillNav() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -42,6 +43,29 @@ export function PillNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const sectionIds = ["about", "projects"];
+    const observers: IntersectionObserver[] = [];
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.3 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+    return () => observers.forEach((o) => o.disconnect());
+  }, [pathname]);
+
+  const isNavActive = (href: string) => {
+    if (href === "/contact") return pathname === "/contact";
+    if (href.startsWith("/#")) return activeSection === href.substring(2);
+    return pathname === href;
+  };
 
   const ThemeToggle = () => {
     if (!mounted) {
@@ -125,7 +149,7 @@ export function PillNav() {
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-3">
             {navItems.map((item, i) => {
-              const isActive = pathname === item.href;
+              const active = isNavActive(item.href);
               return (
                 <Link
                   key={item.href}
@@ -135,7 +159,7 @@ export function PillNav() {
                   onMouseLeave={() => setHoveredIndex(null)}
                   onClick={(e) => smoothScrollToSection(e, item.href)}
                 >
-                  {(isActive || hoveredIndex === i) && (
+                  {(active || hoveredIndex === i) && (
                     <motion.div
                       layoutId="pill"
                       className="absolute inset-0 rounded-full bg-primary"
@@ -145,7 +169,7 @@ export function PillNav() {
                   <span
                     className={cn(
                       "relative z-10 transition-colors duration-300",
-                      isActive || hoveredIndex === i
+                      active || hoveredIndex === i
                         ? "text-primary-foreground"
                         : "text-foreground/70"
                     )}
@@ -207,7 +231,7 @@ export function PillNav() {
                 }}
                 className={cn(
                   "transition-colors",
-                  pathname === item.href ? "text-primary" : "text-foreground"
+                  isNavActive(item.href) ? "text-primary" : "text-foreground"
                 )}
               >
                 {item.label}

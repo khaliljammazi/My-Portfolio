@@ -37,11 +37,10 @@ export function Footer() {
           {/* Brand/Info */}
           <div className="space-y-3 md:space-y-4 text-center md:text-left">
             <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
-              Jammazi khalil
+              Khalil Jammazi
             </h3>
             <p className="text-[hsl(var(--muted-foreground))] text-xs md:text-sm max-w-xs mx-auto md:mx-0">
-              Software developer specializing in web development and design. 
-              Building beautiful, functional digital experiences.
+              Full-stack developer passionate about creating beautiful and functional web applications.
             </p>
           </div>
 
@@ -85,7 +84,7 @@ export function Footer() {
                 const Icon = social.icon;
                 return (
                   <a
-                    key={social.label}
+                    key={social.href}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -109,7 +108,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-6 md:pt-8 border-t border-[hsl(var(--border))] flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
           <p className="text-[hsl(var(--muted-foreground))] text-xs md:text-sm text-center md:text-left">
-            © {currentYear} Jammazi khalil. All rights reserved.
+            © {currentYear} Khalil Jammazi. All rights reserved.
           </p>
           <div className="flex gap-4 md:gap-6 text-xs md:text-sm text-[hsl(var(--muted-foreground))]">
             <Link href="/privacy" className="hover:text-[var(--secondary)] transition-colors">

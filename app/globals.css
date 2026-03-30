@@ -78,8 +78,41 @@
   --color-border: var(--border);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans, ui-sans-serif);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 999px;
+  opacity: 0.5;
+}
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* Text selection */
+::selection {
+  background: color-mix(in srgb, var(--secondary) 30%, transparent);
+  color: hsl(var(--foreground));
+}
+
+/* Focus visible ring using brand color */
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

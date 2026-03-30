@@ -13,14 +13,14 @@ type FormData = {
   timeline: string;
 };
 
-const steps = [
-  { id: 1, title: "Personal Info", icon: User },
-  { id: 2, title: "Project Details", icon: MessageSquare },
-  { id: 3, title: "Review & Send", icon: Send },
-];
-
 export default function ContactPage() {
   const [currentStep, setCurrentStep] = useState(1);
+
+  const steps = [
+    { id: 1, title: "Personal Info", icon: User },
+    { id: 2, title: "Project Details", icon: MessageSquare },
+    { id: 3, title: "Review & Send", icon: Send },
+  ];
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -30,6 +30,8 @@ export default function ContactPage() {
     timeline: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -44,9 +46,25 @@ export default function ContactPage() {
   };
 
   const handleSubmit = async () => {
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitted(true);
+    setIsLoading(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setSubmitError(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+      setIsSubmitted(true);
+    } catch {
+      setSubmitError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const isStepComplete = (stepId: number) => {
@@ -69,7 +87,7 @@ export default function ContactPage() {
             Let's Work Together
           </h1>
           <p className="text-xl text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
-            Have a project in mind? Fill out the form below and I'll get back to you within 24 hours.
+            Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
         </motion.div>
 
@@ -138,17 +156,17 @@ export default function ContactPage() {
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <h3 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-6">Tell me about yourself</h3>
+                    <h3 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-6">Personal Information</h3>
                     
                     <div>
                       <label className="block text-sm font-medium text-[hsl(var(--foreground))] mb-2">
-                        Your Name *
+                        Full Name *
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => updateFormData("name", e.target.value)}
-                        placeholder="John Doe"
+                        placeholder="Enter your full name"
                         className="w-full px-4 py-3 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))]"
                       />
                     </div>
@@ -161,7 +179,7 @@ export default function ContactPage() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => updateFormData("email", e.target.value)}
-                        placeholder="john@example.com"
+                        placeholder="Enter your email address"
                         className="w-full px-4 py-3 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))]"
                       />
                     </div>
@@ -177,29 +195,34 @@ export default function ContactPage() {
                     transition={{ duration: 0.3 }}
                     className="space-y-6"
                   >
-                    <h3 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-6">Project Information</h3>
+                    <h3 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-6">Project Details</h3>
                     
                     <div>
                       <label className="block text-sm font-medium text-[hsl(var(--foreground))] mb-2">
-                        Subject *
+                        Project Subject *
                       </label>
                       <input
                         type="text"
                         value={formData.subject}
                         onChange={(e) => updateFormData("subject", e.target.value)}
-                        placeholder="Website Development"
+                        placeholder="Brief description of your project"
                         className="w-full px-4 py-3 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-[hsl(var(--foreground))] mb-2">
-                        Project Description *
-                      </label>
+                      <div className="flex justify-between items-center mb-2">
+                        <label className="text-sm font-medium text-[hsl(var(--foreground))]">
+                          Project Description *
+                        </label>
+                        <span className={`text-xs tabular-nums ${formData.message.length > 450 ? "text-red-500" : "text-[hsl(var(--muted-foreground))]"}`}>
+                          {formData.message.length}/500
+                        </span>
+                      </div>
                       <textarea
                         value={formData.message}
-                        onChange={(e) => updateFormData("message", e.target.value)}
-                        placeholder="Tell me about your project..."
+                        onChange={(e) => updateFormData("message", e.target.value.slice(0, 500))}
+                        placeholder="Tell me more about your project requirements, goals, and timeline"
                         rows={4}
                         className="w-full px-4 py-3 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] resize-none"
                       />
@@ -215,11 +238,11 @@ export default function ContactPage() {
                           onChange={(e) => updateFormData("budget", e.target.value)}
                           className="w-full px-4 py-3 bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] text-[hsl(var(--foreground))]"
                         >
-                          <option value="">Select budget</option>
-                          <option value="< $5k">{"< $5,000"}</option>
+                          <option value="">Select budget range</option>
+                          <option value="< $5k">Under $5,000</option>
                           <option value="$5k - $10k">$5,000 - $10,000</option>
                           <option value="$10k - $25k">$10,000 - $25,000</option>
-                          <option value="> $25k">{"> $25,000"}</option>
+                          <option value="> $25k">Over $25,000</option>
                         </select>
                       </div>
 
@@ -236,7 +259,7 @@ export default function ContactPage() {
                           <option value="1-2 weeks">1-2 weeks</option>
                           <option value="1 month">1 month</option>
                           <option value="2-3 months">2-3 months</option>
-                          <option value="3+ months">3+ months</option>
+                          <option value="3+ months">3+ months or more</option>
                         </select>
                       </div>
                     </div>
@@ -289,73 +312,81 @@ export default function ContactPage() {
               </AnimatePresence>
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between mt-8 pt-6 border-t border-[hsl(var(--border))]">
-                <button
-                  onClick={prevStep}
-                  disabled={currentStep === 1}
-                  className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[hsl(var(--muted))] text-[hsl(var(--foreground))]"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back
-                </button>
-
-                {currentStep < steps.length ? (
-                  <button
-                    onClick={nextStep}
-                    disabled={!isStepComplete(currentStep)}
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                  >
-                    Next
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleSubmit}
-                    className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform"
-                  >
-                    Submit
-                    <Send className="w-4 h-4" />
-                  </button>
+              <div className="mt-8 pt-6 border-t border-[hsl(var(--border))]">
+                {submitError && (
+                  <p className="mb-4 text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3">
+                    {submitError}
+                  </p>
                 )}
+                <div className="flex justify-between">
+                  <button
+                    onClick={prevStep}
+                    disabled={currentStep === 1 || isLoading}
+                    className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[hsl(var(--muted))] text-[hsl(var(--foreground))]"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Back
+                  </button>
+
+                  {currentStep < steps.length ? (
+                    <button
+                      onClick={nextStep}
+                      disabled={!isStepComplete(currentStep)}
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      Next
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleSubmit}
+                      disabled={isLoading}
+                      className="flex items-center gap-2 px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      {isLoading ? "Sending..." : "Send Message"}
+                      <Send className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           </>
         ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-12 text-center"
-          >
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
-              className="w-20 h-20 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] rounded-full flex items-center justify-center mx-auto mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-2xl p-12 text-center"
             >
-              <Check className="w-10 h-10 text-white" />
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: "spring" }}
+                className="w-20 h-20 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <Check className="w-10 h-10 text-white" />
+              </motion.div>
+              <h3 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-4">Message Sent Successfully!</h3>
+              <p className="text-[hsl(var(--muted-foreground))] mb-8">
+                Thank you for reaching out. I'll get back to you within 24 hours.
+              </p>
+              <button
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setCurrentStep(1);
+                  setFormData({
+                    name: "",
+                    email: "",
+                    subject: "",
+                    message: "",
+                    budget: "",
+                    timeline: "",
+                  });
+                }}
+                className="px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform"
+              >
+                Send Another Message
+              </button>
             </motion.div>
-            <h3 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-4">Message Sent!</h3>
-            <p className="text-[hsl(var(--muted-foreground))] mb-8">
-              Thank you for reaching out! I'll get back to you within 24 hours.
-            </p>
-            <button
-              onClick={() => {
-                setIsSubmitted(false);
-                setCurrentStep(1);
-                setFormData({
-                  name: "",
-                  email: "",
-                  subject: "",
-                  message: "",
-                  budget: "",
-                  timeline: "",
-                });
-              }}
-              className="px-6 py-3 rounded-lg font-medium bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform"
-            >
-              Send Another Message
-            </button>
-          </motion.div>
         )}
       </div>
     </main>
