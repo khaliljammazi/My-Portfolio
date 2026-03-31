@@ -13,7 +13,7 @@ const experience = [
     role: "Lead Frontend Developer",
     company: "Maroc Telecom (IAM)",
     period: "2024 – 2025",
-    location: "Morocco",
+    location: "tunis, Tunisia (Remote)",
     bullets: [
       "Rebuilt iam.ma using Liferay DXP + React, achieving +340% performance improvement",
       "Designed and developed 50+ responsive page templates serving 30M+ monthly visitors",
@@ -80,7 +80,7 @@ export default function ResumePage() {
               </a>
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" />
-                Morocco (Remote)
+                Tunisia (Remote)
               </span>
               <a href="https://github.com/khaliljammazi" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-white transition-colors">
                 <Github className="w-3.5 h-3.5" />
