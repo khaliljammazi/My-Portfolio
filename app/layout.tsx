@@ -8,6 +8,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { MusicPlayer } from "./components/MusicPlayer";
 import { MusicProvider } from "./context/MusicContext";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -141,6 +142,7 @@ export default function RootLayout({
             <MusicPlayer />
           </MusicProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
