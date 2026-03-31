@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, CheckCircle2, ChevronRight } from "lucide-react";
@@ -8,9 +8,13 @@ import type { Project } from "@/data/projects";
 
 type Props = { project: Project; nextProject: Project };
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] },
+  },
 };
 
 export default function ProjectDetailClient({ project, nextProject }: Props) {
