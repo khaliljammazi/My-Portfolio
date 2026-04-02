@@ -34,6 +34,7 @@ export function ProjectCard({ project }: { project: Project }) {
               src={project.image}
               alt={project.title}
               fill
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
               className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
             />
             {/* Gradient Overlay */}

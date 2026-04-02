@@ -30,63 +30,40 @@ export function BrandsSection() {
           {brands.map((brand, index) => (
             <motion.div
               key={brand.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
               viewport={{ once: true }}
             >
               <Link
                 href={brand.url || "#"}
                 target={brand.url && brand.url !== "#" ? "_blank" : undefined}
                 rel={brand.url && brand.url !== "#" ? "noopener noreferrer" : undefined}
-                className="group flex flex-col items-center justify-center p-6 md:p-8 rounded-2xl bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-lg hover:shadow-[var(--secondary)]/10 hover:-translate-y-1 aspect-square"
+                className="group relative flex items-center justify-between gap-4 px-5 py-4 rounded-[100px_20px_20px_100px] bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(144,25,215,0.18)]"
               >
-                <div className="relative w-16 h-16 md:w-20 md:h-20 mb-4 grayscale group-hover:grayscale-0 transition-all duration-300">
+                <div className="absolute left-2 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[hsl(var(--card))] p-1 shadow-md border border-[hsl(var(--border))]">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    fill
-                    className="object-contain"
+                    width={56}
+                    height={56}
+                    className="w-full h-full rounded-full object-contain"
                     unoptimized
                   />
                 </div>
-                <span className="text-sm md:text-base font-medium text-[hsl(var(--muted-foreground))] group-hover:text-[var(--secondary)] transition-colors text-center">
-                  {brand.name}
+                <div className="pl-12">
+                  <span className="block text-sm md:text-base font-semibold text-[hsl(var(--foreground))]">
+                    {brand.name}
+                  </span>
+              
+                </div>
+                <span className="ml-auto text-xs md:text-sm font-medium px-3 py-1.5 rounded-full text-white bg-gradient-to-b from-[#bea2e7] to-[#86b7e7] transition-transform group-hover:scale-95">
+                  Visit
                 </span>
               </Link>
             </motion.div>
           ))}
         </div>
-
-        {/* Animated marquee for extra flair */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-16 pt-8 border-t border-[hsl(var(--border))]"
-        >
-          <div className="relative overflow-hidden">
-            <div className="flex animate-marquee">
-              {[...brands, ...brands].map((brand, index) => (
-                <div
-                  key={`${brand.name}-${index}`}
-                  className="flex-shrink-0 mx-8 md:mx-12"
-                >
-                  <div className="relative w-12 h-12 md:w-16 md:h-16 opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0">
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      fill
-                      className="object-contain"
-                      unoptimized
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

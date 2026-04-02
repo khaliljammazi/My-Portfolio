@@ -96,6 +96,7 @@ export function AboutSection() {
                   src="/img/avatar.jpg"
                   alt="Jammazi Khalil"
                   fill
+                  sizes="(min-width: 768px) 160px, (min-width: 640px) 128px, 96px"
                   className="object-cover"
                   priority
                 />
@@ -124,7 +125,7 @@ export function AboutSection() {
           className="grid md:grid-cols-2 gap-4 md:gap-8 mb-12 md:mb-20"
         >
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">🚀 What I Do</h3>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">What I Do</h3>
             <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
               I design and develop full-stack web applications with a focus on user experience, 
               performance, and scalability. From responsive frontends to robust backends, 
@@ -133,7 +134,7 @@ export function AboutSection() {
           </div>
 
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">🛠️ Tech Stack</h3>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">Tech Stack</h3>
             <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
               I work with modern technologies including React, Next.js, TypeScript, Node.js, 
               and various databases. I'm always learning and adapting to new tools and frameworks.

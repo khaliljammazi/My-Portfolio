@@ -26,6 +26,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
           src={project.image}
           alt={project.title}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
         />
@@ -282,6 +283,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
                   src={nextProject.image}
                   alt={nextProject.title}
                   fill
+                  sizes="(min-width: 768px) 80px, 64px"
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>

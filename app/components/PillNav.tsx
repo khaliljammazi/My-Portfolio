@@ -14,14 +14,18 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-const smoothScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  if (href.startsWith('/#')) {
-    e.preventDefault();
-    const targetId = href.substring(2);
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+const smoothScrollToSection = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+  pathname: string
+) => {
+  if (!href.startsWith("/#")) return;
+  if (pathname !== "/") return;
+  e.preventDefault();
+  const targetId = href.substring(2);
+  const element = document.getElementById(targetId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
 
@@ -157,7 +161,7 @@ export function PillNav() {
                   className="relative px-4 md:px-7 py-2.5 md:py-3.5 text-base md:text-lg font-medium"
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={(e) => smoothScrollToSection(e, item.href)}
+                  onClick={(e) => smoothScrollToSection(e, item.href, pathname)}
                 >
                   {(active || hoveredIndex === i) && (
                     <motion.div
@@ -223,10 +227,10 @@ export function PillNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={(e) => {
-                  smoothScrollToSection(e, item.href);
-                  setMobileOpen(false);
-                }}
+                  onClick={(e) => {
+                    smoothScrollToSection(e, item.href, pathname);
+                    setMobileOpen(false);
+                  }}
                 className={cn(
                   "transition-colors",
                   isNavActive(item.href) ? "text-primary" : "text-foreground"
