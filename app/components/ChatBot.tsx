@@ -101,12 +101,12 @@ export function ChatBot() {
             className="fixed bottom-4 md:bottom-8 right-4 md:right-8 z-50"
             style={{ pointerEvents: "none" }}
           >
-            <div
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              style={{ pointerEvents: "auto" }}
-              className="relative bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl md:rounded-2xl p-1.5 md:p-2 backdrop-blur-sm border border-purple-500/30"
-            >
+              <div
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+                style={{ pointerEvents: "auto" }}
+                className="relative rounded-xl md:rounded-2xl p-1.5 md:p-2 backdrop-blur-sm border border-[var(--secondary)]/40 bg-[hsl(var(--card))]/80 shadow-lg"
+              >
               <Robot3D cursorPosition={cursorPosition} onClick={() => setIsOpen(true)} />
               <AnimatePresence>
                 {isHovering && (

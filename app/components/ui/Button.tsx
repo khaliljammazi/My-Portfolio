@@ -56,7 +56,7 @@ export function Button({
           <motion.div
             className="absolute inset-0"
             style={{
-              background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(147, 51, 234, 0.4), transparent 40%)`,
+              background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, hsl(var(--primary) / 0.35), transparent 40%)`,
             }}
           />
           {/* Rotating border gradient */}

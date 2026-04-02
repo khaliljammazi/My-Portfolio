@@ -33,6 +33,12 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
       head: THREE.MeshStandardMaterial;
       arms: THREE.MeshStandardMaterial;
       antenna: THREE.MeshStandardMaterial;
+      eyes: THREE.MeshStandardMaterial;
+      ball: THREE.MeshStandardMaterial;
+    };
+    lights: {
+      key: THREE.PointLight;
+      fill: THREE.PointLight;
     };
   } | null>(null);
 
@@ -63,11 +69,15 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0x9019d7, 1, 100);
+    const isDarkTheme = theme === "dark" || !theme;
+    const basePrimary = isDarkTheme ? 0xef4444 : 0x1e40af;
+    const baseSecondary = isDarkTheme ? 0xf87171 : 0x3b82f6;
+
+    const pointLight = new THREE.PointLight(basePrimary, 1, 100);
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
 
-    const pointLight2 = new THREE.PointLight(0x7c3aed, 0.8, 100);
+    const pointLight2 = new THREE.PointLight(baseSecondary, 0.8, 100);
     pointLight2.position.set(-5, -5, 5);
     scene.add(pointLight2);
 
@@ -75,7 +85,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     // Body
     const bodyGeometry = new THREE.BoxGeometry(1.2, 1.5, 1);
     const bodyMaterial = new THREE.MeshStandardMaterial({
-      color: 0x9019d7,
+      color: basePrimary,
       metalness: 0.7,
       roughness: 0.3,
     });
@@ -87,7 +97,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     const head = new THREE.Group();
     const headGeometry = new THREE.BoxGeometry(1, 1, 0.8);
     const headMaterial = new THREE.MeshStandardMaterial({
-      color: 0xb366ff,
+      color: baseSecondary,
       metalness: 0.6,
       roughness: 0.4,
     });
@@ -99,8 +109,8 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     // Eyes
     const eyeGeometry = new THREE.SphereGeometry(0.15, 16, 16);
     const eyeMaterial = new THREE.MeshStandardMaterial({
-      color: 0x00ffff,
-      emissive: 0x00ffff,
+      color: baseSecondary,
+      emissive: baseSecondary,
       emissiveIntensity: 0.5,
     });
 
@@ -115,7 +125,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     // Antenna
     const antennaGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 8);
     const antennaMaterial = new THREE.MeshStandardMaterial({
-      color: 0x9019d7,
+      color: basePrimary,
       metalness: 0.8,
     });
     const antenna = new THREE.Mesh(antennaGeometry, antennaMaterial);
@@ -125,8 +135,8 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     // Antenna ball
     const ballGeometry = new THREE.SphereGeometry(0.1, 16, 16);
     const ballMaterial = new THREE.MeshStandardMaterial({
-      color: 0xff00ff,
-      emissive: 0xff00ff,
+      color: baseSecondary,
+      emissive: baseSecondary,
       emissiveIntensity: 0.3,
     });
     const ball = new THREE.Mesh(ballGeometry, ballMaterial);
@@ -136,7 +146,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     // Arms
     const armGeometry = new THREE.BoxGeometry(0.3, 1, 0.3);
     const armMaterial = new THREE.MeshStandardMaterial({
-      color: 0x9019d7,
+      color: basePrimary,
       metalness: 0.7,
       roughness: 0.3,
     });
@@ -162,6 +172,12 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
         head: headMaterial,
         arms: armMaterial,
         antenna: antennaMaterial,
+        eyes: eyeMaterial,
+        ball: ballMaterial,
+      },
+      lights: {
+        key: pointLight,
+        fill: pointLight2,
       },
     };
 
@@ -262,17 +278,24 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
   useEffect(() => {
     if (!sceneRef.current) return;
 
-    const { materials } = sceneRef.current;
+    const { materials, lights } = sceneRef.current;
     const isDark = theme === "dark";
 
     // Update robot colors based on theme
-    const primaryColor = isDark ? 0x9019d7 : 0x7c3aed; // purple-600 in light mode
-    const secondaryColor = isDark ? 0xb366ff : 0xa78bfa; // purple-400 in light mode
+    const primaryColor = isDark ? 0xef4444 : 0x1e40af; // red in dark mode, dark blue in light mode
+    const secondaryColor = isDark ? 0xf87171 : 0x3b82f6;
 
     materials.body.color.setHex(primaryColor);
     materials.head.color.setHex(secondaryColor);
     materials.arms.color.setHex(primaryColor);
     materials.antenna.color.setHex(primaryColor);
+    materials.eyes.color.setHex(secondaryColor);
+    materials.eyes.emissive.setHex(secondaryColor);
+    materials.ball.color.setHex(secondaryColor);
+    materials.ball.emissive.setHex(secondaryColor);
+
+    lights.key.color.setHex(primaryColor);
+    lights.fill.color.setHex(secondaryColor);
   }, [theme]);
 
   // Update head rotation based on cursor position

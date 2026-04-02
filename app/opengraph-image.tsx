@@ -16,7 +16,7 @@ export default async function Image() {
       <div
         style={{
           fontSize: 48,
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)',
+          background: 'linear-gradient(135deg, #0b0b0b 0%, #2a0e14 45%, #0f1b3d 100%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -35,7 +35,7 @@ export default async function Image() {
             width: 400,
             height: 400,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(144, 25, 215, 0.3) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(239, 68, 68, 0.28) 0%, transparent 70%)',
           }}
         />
         <div
@@ -46,7 +46,7 @@ export default async function Image() {
             width: 500,
             height: 500,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(82, 39, 255, 0.2) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(30, 58, 138, 0.22) 0%, transparent 70%)',
           }}
         />
 
@@ -55,7 +55,7 @@ export default async function Image() {
           style={{
             fontSize: 72,
             fontWeight: 'bold',
-            background: 'linear-gradient(90deg, #9019d7, #5227FF)',
+            background: 'linear-gradient(90deg, #ef4444, #1e40af)',
             backgroundClip: 'text',
             color: 'transparent',
             marginBottom: 16,
@@ -89,8 +89,8 @@ export default async function Image() {
               style={{
                 padding: '8px 20px',
                 borderRadius: 24,
-                border: '1px solid rgba(144, 25, 215, 0.5)',
-                color: '#b19eef',
+                border: '1px solid rgba(30, 58, 138, 0.5)',
+                color: '#93c5fd',
                 fontSize: 20,
               }}
             >

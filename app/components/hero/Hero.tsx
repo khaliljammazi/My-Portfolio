@@ -5,8 +5,15 @@ import BlurText from "./BlurText";
 import LiquidEther from "./LiquidEther";
 import { ArrowDown, Code2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTheme } from "next-themes";
 
 export function Hero() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme !== "light";
+  const liquidColors = isDark
+    ? ["#ef4444", "#f87171", "#dc2626"]
+    : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
+
   const stats = [
     { label: "Years Experience", value: "3+" },
     { label: "Projects Completed", value: "20+" }
@@ -17,7 +24,7 @@ export function Hero() {
       className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
       aria-label="Hero section - Introduction"
     >
-        <LiquidEther />
+        <LiquidEther colors={liquidColors} />
         
         {/* Main Content */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 md:gap-6 max-w-4xl px-4 md:px-6 w-full">

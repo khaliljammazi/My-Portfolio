@@ -6,20 +6,23 @@
     --background: 0 0% 8%;         
     --foreground: 0 0% 95%;         
 
-    --primary: 263 85% 57%;         
+    --primary: 0 84% 56%;         
     --primary-foreground: 0 0% 98%; 
-
-    --secondary: #9019d7;
+ 
+    --secondary: #ef4444;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
-    --accent: 263 85% 57%;
+    --accent: 0 84% 56%;
     --accent-foreground: 0 0% 98%;
     --border: 0 0% 18%;
-    --border-secondary: #9019d7;
+    --border-secondary: #ef4444;
     --card: 0 0% 12%;
     --card-foreground: 0 0% 90%;
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
+    --brand-soft-1: rgba(239, 68, 68, 0.2);
+    --brand-soft-2: rgba(220, 38, 38, 0.25);
+    --brand-border: rgba(239, 68, 68, 0.35);
   }
 
   /* Light mode colors */
@@ -27,20 +30,23 @@
     --background: 0 0% 100%;
     --foreground: 0 0% 10%;
     
-    --primary: 263 85% 57%;
+    --primary: 221 83% 45%;
     --primary-foreground: 0 0% 98%;
-    
-    --secondary: #9019d7;
+
+    --secondary: #1e3a8a;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-    --accent: 263 85% 57%;
+    --accent: 221 83% 45%;
     --accent-foreground: 0 0% 98%;
     --border: 0 0% 90%;
-    --border-secondary: #9019d7;
+    --border-secondary: #1e3a8a;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
+    --brand-soft-1: rgba(30, 58, 138, 0.18);
+    --brand-soft-2: rgba(29, 78, 216, 0.22);
+    --brand-border: rgba(30, 58, 138, 0.35);
   }
 
   /* Dark mode (when .dark class is present) */
@@ -48,20 +54,23 @@
     --background: 0 0% 8%;
     --foreground: 0 0% 95%;
     
-    --primary: 263 90% 62%;
+    --primary: 0 86% 60%;
     --primary-foreground: 0 0% 98%;
-    
-    --secondary: #9019d7;
+
+    --secondary: #ef4444;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
-    --accent: 263 85% 57%;
+    --accent: 0 86% 60%;
     --accent-foreground: 0 0% 98%;
     --border: 0 0% 18%;
-    --border-secondary: #9019d7;
+    --border-secondary: #ef4444;
     --card: 0 0% 12%;
     --card-foreground: 0 0% 90%;
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
+    --brand-soft-1: rgba(239, 68, 68, 0.2);
+    --brand-soft-2: rgba(220, 38, 38, 0.25);
+    --brand-border: rgba(239, 68, 68, 0.35);
   }
 }
 

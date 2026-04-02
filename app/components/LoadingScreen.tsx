@@ -33,24 +33,24 @@ export function LoadingScreen() {
               className="relative"
             >
               {/* Outer glow */}
-              <div className="absolute -inset-8 rounded-full bg-gradient-to-r from-[var(--secondary)]/30 to-[hsl(var(--primary))]/30 blur-2xl animate-pulse" />
+              <div className="absolute -inset-10 rounded-full bg-gradient-to-r from-[var(--secondary)]/30 to-[hsl(var(--primary))]/30 blur-2xl animate-pulse" />
 
               {/* Orbiting dots */}
-              <div className="absolute -inset-12 animate-spin-slow">
+              <div className="absolute -inset-14 animate-spin-slow">
                 <span className="absolute top-0 left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-[var(--secondary)] shadow-[0_0_12px_rgba(144,25,215,0.8)]" />
                 <span className="absolute bottom-2 left-2 w-2 h-2 rounded-full bg-[hsl(var(--primary))] shadow-[0_0_10px_rgba(139,92,246,0.8)]" />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-white/80" />
               </div>
 
               {/* Gradient ring */}
-              <div className="relative w-32 h-32 rounded-full p-[3px] bg-gradient-to-r from-[var(--secondary)] via-[hsl(var(--primary))] to-[var(--secondary)] shadow-2xl">
+              <div className="relative w-36 h-36 rounded-full p-[3px] bg-gradient-to-r from-[var(--secondary)] via-[hsl(var(--primary))] to-[var(--secondary)] shadow-2xl">
                 <div className="relative w-full h-full rounded-full bg-[hsl(var(--background))] flex items-center justify-center overflow-hidden">
                   <Image
                     src="/img/loder-avatar-img.svg"
                     alt="Khalil Jammazi cartoon avatar"
-                    width={128}
-                    height={128}
-                    className="w-24 h-24 animate-floaty"
+                    width={144}
+                    height={144}
+                    className="w-28 h-28 animate-floaty"
                     priority
                   />
                 </div>
