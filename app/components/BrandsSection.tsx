@@ -4,11 +4,17 @@ import { motion } from "motion/react";
 import { brands } from "@/data/brands";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export function BrandsSection() {
+  const [paused, setPaused] = useState(false);
+  // Duplicate for seamless loop
+  const loopedBrands = [...brands, ...brands, ...brands];
+
+
   return (
-    <section className="py-16 md:py-24 px-4 md:px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-16 md:py-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,45 +30,57 @@ export function BrandsSection() {
             Trusted by leading companies across telecom, finance, and technology sectors
           </p>
         </motion.div>
+      </div>
 
-        {/* Brands Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8">
-          {brands.map((brand, index) => (
-            <motion.div
-              key={brand.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              viewport={{ once: true }}
-            >
+      {/* Scrolling strip */}
+      <div className="relative w-full">
+        {/* Fade masks */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-28 z-10 bg-gradient-to-r from-[hsl(var(--background))] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-28 z-10 bg-gradient-to-l from-[hsl(var(--background))] to-transparent" />
+
+{/* Track wrapper — hover here pauses the CSS animation */}
+        <div
+          className="overflow-hidden"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <div
+className="flex gap-5 w-max"
+            style={{
+              animation: `marquee 45s linear infinite`,
+              animationPlayState: paused ? "paused" : "running",
+            }}
+          >
+            {loopedBrands.map((brand, index) => (
               <Link
+                key={`${brand.name}-${index}`}
                 href={brand.url || "#"}
                 target={brand.url && brand.url !== "#" ? "_blank" : undefined}
                 rel={brand.url && brand.url !== "#" ? "noopener noreferrer" : undefined}
-                className="group relative flex items-center justify-between gap-4 px-5 py-4 rounded-[100px_20px_20px_100px] bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-[0_10px_30px_rgba(144,25,215,0.18)]"
+                className="group flex-shrink-0 flex flex-col items-center justify-center gap-3
+                           w-48 h-48 rounded-2xl
+                           bg-[hsl(var(--card))] border border-[hsl(var(--border))]
+                           hover:border-[var(--secondary)]
+                           hover:shadow-[0_8px_32px_rgba(239,68,68,0.22)]
+                           hover:-translate-y-1.5
+                           transition-all duration-300"
               >
-                <div className="absolute left-2 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-[hsl(var(--card))] p-1 shadow-md border border-[hsl(var(--border))]">
+                <div className="w-20 h-20 rounded-xl overflow-hidden flex items-center justify-center bg-white/5 p-2">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    width={56}
-                    height={56}
-                    className="w-full h-full rounded-full object-contain"
+                    width={72}
+                    height={72}
+                    className="w-full h-full object-contain"
                     unoptimized
                   />
                 </div>
-                <div className="pl-12">
-                  <span className="block text-sm md:text-base font-semibold text-[hsl(var(--foreground))]">
-                    {brand.name}
-                  </span>
-              
-                </div>
-                <span className="ml-auto text-xs md:text-sm font-medium px-3 py-1.5 rounded-full text-white bg-gradient-to-b from-[#bea2e7] to-[#86b7e7] transition-transform group-hover:scale-95">
-                  Visit
+                <span className="text-sm font-semibold text-center text-[hsl(var(--foreground))] leading-tight px-3 line-clamp-2">
+                  {brand.name}
                 </span>
               </Link>
-            </motion.div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
