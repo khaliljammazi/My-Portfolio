@@ -1,7 +1,7 @@
 // src/components/PillNav.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -38,6 +38,7 @@ export function PillNav() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -48,6 +49,23 @@ export function PillNav() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (pathname !== "/") return;
@@ -223,9 +241,12 @@ export function PillNav() {
           <div className="md:hidden flex items-center gap-2 md:gap-4">
             <ThemeToggle />
             <button
+              ref={menuButtonRef}
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-1.5 md:p-2 z-50"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? <Close /> : <Hamburger />}
             </button>
@@ -236,6 +257,7 @@ export function PillNav() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <motion.div
+          id="mobile-navigation"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}

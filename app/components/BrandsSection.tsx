@@ -27,7 +27,7 @@ export function BrandsSection() {
             Brands I Worked With
           </h2>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
-            Trusted by leading companies across telecom, finance, and technology sectors
+            Enterprise experience across telecom, aviation, finance, and technology
           </p>
         </motion.div>
       </div>

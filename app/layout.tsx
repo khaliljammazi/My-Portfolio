@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@blossom-carousel/react/style.css";
 import { PillNav } from "./components/PillNav";
-import { ChatBot } from "./components/ChatBot";
+import { DeferredChatBot } from "./components/DeferredChatBot";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { MusicPlayer } from "./components/MusicPlayer";
@@ -140,7 +140,7 @@ export default function RootLayout({
             <PillNav />
             {children}
             <Footer />
-            <ChatBot />
+            <DeferredChatBot />
             <MusicPlayer />
           </MusicProvider>
         </ThemeProvider>

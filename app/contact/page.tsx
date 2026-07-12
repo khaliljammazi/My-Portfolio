@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, ArrowLeft, Mail, User, MessageSquare, Send } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, Mail, User, MessageSquare, Send, Copy, Github, Linkedin } from "lucide-react";
+
+const contactEmail = "khalil.jammazi366@gmail.com";
 
 type FormData = {
   name: string;
@@ -32,6 +34,13 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText(contactEmail);
+    setEmailCopied(true);
+    window.setTimeout(() => setEmailCopied(false), 1800);
+  };
 
   const updateFormData = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -90,6 +99,31 @@ export default function ContactPage() {
             Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: .15, duration: .5 }}
+          className="grid sm:grid-cols-3 gap-3 mb-10"
+        >
+          <button onClick={copyEmail} className="contact-quick-link text-left" aria-live="polite">
+            <span className="contact-quick-icon">{emailCopied ? <Check /> : <Copy />}</span>
+            <span><strong>{emailCopied ? "Email copied" : "Copy my email"}</strong><small>{contactEmail}</small></span>
+          </button>
+          <a href="https://www.linkedin.com/in/jammazi-mohamed-khalil-440a83119/" target="_blank" rel="noreferrer" className="contact-quick-link">
+            <span className="contact-quick-icon"><Linkedin /></span>
+            <span><strong>LinkedIn</strong><small>Professional profile</small></span>
+          </a>
+          <a href="https://github.com/khaliljammazi" target="_blank" rel="noreferrer" className="contact-quick-link">
+            <span className="contact-quick-icon"><Github /></span>
+            <span><strong>GitHub</strong><small>Code and experiments</small></span>
+          </a>
+        </motion.div>
+
+        <div className="mb-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-[hsl(var(--muted-foreground))]">
+          <span className="inline-flex items-center gap-2"><i className="size-2 rounded-full bg-emerald-500 animate-pulse" /> Available for selected projects</span>
+          <span>Typical response: within 1–2 business days</span>
+        </div>
 
         {!isSubmitted ? (
           <>

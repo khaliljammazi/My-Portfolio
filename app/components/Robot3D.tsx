@@ -182,8 +182,9 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
     };
 
     // Animation loop
+    let animationFrameId = 0;
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
 
       const time = Date.now() * 0.001;
       const isMusicPlaying = isPlayingRef.current;
@@ -254,6 +255,7 @@ export function Robot3D({ cursorPosition, onClick }: Robot3DProps) {
 
     // Cleanup
     return () => {
+      cancelAnimationFrame(animationFrameId);
       // Dispose all geometries and materials
       scene.traverse((object) => {
         if (object instanceof THREE.Mesh) {

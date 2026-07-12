@@ -4,19 +4,20 @@ import { Button } from "../ui/Button";
 import BlurText from "./BlurText";
 import LiquidEther from "./LiquidEther";
 import { ArrowDown, Code2, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
+  const reduceMotion = useReducedMotion();
   const isDark = resolvedTheme !== "light";
   const liquidColors = isDark
     ? ["#ef4444", "#f87171", "#dc2626"]
     : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
 
   const stats = [
-    { label: "Years Experience", value: "3+" },
-    { label: "Projects Completed", value: "20+" }
+    { label: "Years building products", value: "3+" },
+    { label: "Core specialities", value: "Web · Mobile · Data" }
   ];
 
   return (
@@ -24,7 +25,11 @@ export function Hero() {
       className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
       aria-label="Hero section - Introduction"
     >
-        <LiquidEther colors={liquidColors} />
+        {reduceMotion ? (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,var(--brand-soft-2),transparent_55%)]" aria-hidden="true" />
+        ) : (
+          <LiquidEther colors={liquidColors} />
+        )}
         
         {/* Main Content */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 md:gap-6 max-w-4xl px-4 md:px-6 w-full">
@@ -41,10 +46,10 @@ export function Hero() {
             <span className="text-xs md:text-sm font-medium text-[hsl(var(--foreground))]">Available for freelance work</span>
           </motion.div>
 
-          <h1 className="sr-only">Jammazi Khalil - Full-Stack Developer Portfolio</h1>
+          <h1 className="sr-only">Jammazi Khalil — Full-Stack Developer building scalable digital products</h1>
           
           <BlurText
-            text="Welcome to My Portfolio"
+            text="I build digital products that perform."
             delay={150}
             animateBy="words"
             direction="bottom"
@@ -52,7 +57,7 @@ export function Hero() {
           />
           
           <BlurText
-            text="My name is Jammazi Khalil, a software developer specializing in web development and design."
+            text="I'm Jammazi Khalil, a full-stack developer creating scalable web platforms, interactive experiences, and enterprise applications."
             delay={200}
             animateBy="words"
             className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl text-center leading-relaxed px-2"
@@ -113,7 +118,7 @@ export function Hero() {
         >
           <span className="text-xs md:text-sm text-[hsl(var(--muted-foreground))]">Scroll to explore</span>
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
             <ArrowDown className="w-4 md:w-5 h-4 md:h-5 text-[hsl(var(--muted-foreground))]" aria-hidden="true" />
@@ -122,7 +127,7 @@ export function Hero() {
 
         {/* Floating Icons - Hidden on mobile */}
         <motion.div
-          animate={{ 
+          animate={reduceMotion ? undefined : {
             y: [0, -20, 0],
             rotate: [0, 10, 0]
           }}
@@ -134,7 +139,7 @@ export function Hero() {
         </motion.div>
         
         <motion.div
-          animate={{ 
+          animate={reduceMotion ? undefined : {
             y: [0, 20, 0],
             rotate: [0, -10, 0]
           }}
