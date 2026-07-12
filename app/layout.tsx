@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@blossom-carousel/react/style.css";
 import { PillNav } from "./components/PillNav";
 import { ChatBot } from "./components/ChatBot";
 import { Footer } from "./components/Footer";

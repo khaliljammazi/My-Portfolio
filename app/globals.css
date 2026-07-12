@@ -85,6 +85,81 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-border: var(--border);
+  --expo-in: linear(0 0%, 0.0085 31.26%, 0.0167 40.94%, 0.0289 48.86%, 0.0471 55.92%, 0.0717 61.99%, 0.1038 67.32%, 0.1443 72.07%, 0.1989 76.7%, 0.2659 80.89%, 0.3465 84.71%, 0.4419 88.22%, 0.554 91.48%, 0.6835 94.51%, 0.8316 97.34%, 1 100%);
+  --expo-out: linear(0 0%, 0.1684 2.66%, 0.3165 5.49%, 0.446 8.52%, 0.5581 11.78%, 0.6535 15.29%, 0.7341 19.11%, 0.8011 23.3%, 0.8557 27.93%, 0.8962 32.68%, 0.9283 38.01%, 0.9529 44.08%, 0.9711 51.14%, 0.9833 59.06%, 0.9915 68.74%, 1 100%);
+}
+
+::view-transition-group(root) { animation-timing-function: var(--expo-in); }
+::view-transition-new(root) {
+  mask: url("https://media.tenor.com/Jz0aSpk9VIQAAAAi/i-love-you-love.gif") center / 0 no-repeat;
+  animation: theme-heart-reveal 1.5s both;
+}
+::view-transition-old(root), .dark::view-transition-old(root) { animation: theme-heart-reveal 1.5s both; }
+@keyframes theme-heart-reveal {
+  0% { mask-size: 0; }
+  10%, 90% { mask-size: 50vmax; }
+  100% { mask-size: 2000vmax; }
+}
+
+.theme-robot-toggle { position: relative; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 999px; color: var(--secondary); transition: background-color .2s, transform .2s; }
+.theme-robot-toggle:hover { background: color-mix(in srgb, var(--secondary) 12%, transparent); transform: translateY(-1px); }
+.theme-robot-heart { position: absolute; top: -7px; right: -1px; color: #ef4444; font-size: 15px; opacity: 0; transform: translateY(8px) scale(.2); }
+.theme-robot-toggle.is-loving .theme-robot { animation: robot-love .7s var(--expo-out) both; }
+.theme-robot-toggle.is-loving .theme-robot-heart { animation: robot-heart .9s var(--expo-out) both; }
+@keyframes robot-love { 40% { transform: translateY(2px) rotate(-7deg) scale(.9); } 70% { transform: translateY(-2px) rotate(7deg) scale(1.08); } }
+@keyframes robot-heart { 25% { opacity: 1; transform: translateY(0) scale(1); } 70% { opacity: 1; transform: translateY(-7px) scale(1.25); } 100% { opacity: 0; transform: translateY(-12px) scale(.8); } }
+
+/* Responsive Blossom cover-flow */
+.projects-section { position: relative; width: 100%; overflow: hidden; padding: clamp(5rem, 9vw, 8rem) 0; isolation: isolate; }
+.projects-heading { position: relative; z-index: 2; width: min(92vw, 760px); margin: 0 auto clamp(2rem, 5vw, 4rem); text-align: center; }
+.projects-heading h2 { margin-top: .35rem; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1; letter-spacing: -.055em; background: linear-gradient(100deg, var(--secondary), hsl(var(--primary))); color: transparent; background-clip: text; }
+.projects-heading p { margin-top: 1rem; color: hsl(var(--muted-foreground)); font-size: clamp(.9rem, 2vw, 1.05rem); }
+.projects-kicker, .project-role { color: var(--secondary); font-size: .72rem; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+.projects-glow { position: absolute; z-index: -1; width: min(42rem, 70vw); aspect-ratio: 1; border-radius: 50%; filter: blur(100px); opacity: .11; pointer-events: none; }
+.projects-glow-left { left: -20rem; top: 20%; background: var(--secondary); }
+.projects-glow-right { right: -20rem; bottom: 0; background: hsl(var(--primary)); }
+.projects-cover-flow { padding: 1.75rem calc(50% - min(42vw, 260px)) 2.5rem !important; scroll-snap-type: x mandatory; overflow-y: visible !important; }
+.projects-cover-flow { white-space: nowrap; transform-style: preserve-3d; }
+.project-cover-item { position: relative; display: inline-block; width: min(84vw, 520px); height: clamp(500px, 68vw, 610px); vertical-align: top; white-space: normal; scroll-snap-align: center; transform-style: preserve-3d; view-timeline: --project-slide inline calc(50% - min(35vw, 220px)); }
+.project-cover-slide { position: absolute; inset: 0 -5%; width: 110%; perspective: 1000px; transform-style: preserve-3d; animation: linear project-cover-shift both; animation-timeline: --project-slide; animation-range: contain; }
+.project-cover-card { height: 100%; overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: clamp(1.2rem, 3vw, 2rem); background: hsl(var(--card)); box-shadow: 0 28px 70px rgb(0 0 0 / .22); transform-origin: center; animation: linear project-cover-rotate both; animation-timeline: --project-slide; animation-range: contain; }
+.project-cover-image { position: relative; display: block; height: 54%; overflow: hidden; }
+.project-cover-image img { transition: transform .7s var(--expo-out); }
+.project-cover-card:hover .project-cover-image img { transform: scale(1.05); }
+.project-cover-shade { position: absolute; inset: 0; background: linear-gradient(to top, hsl(var(--card)) 0%, transparent 45%); }
+.project-year { position: absolute; top: 1rem; right: 1rem; padding: .4rem .7rem; border: 1px solid rgb(255 255 255 / .25); border-radius: 999px; background: rgb(0 0 0 / .35); color: white; font-size: .75rem; backdrop-filter: blur(10px); }
+.project-cover-content { display: flex; height: 46%; flex-direction: column; gap: .65rem; padding: clamp(1rem, 3vw, 1.6rem); }
+.project-cover-content h3 { margin-top: .25rem; font-size: clamp(1.35rem, 3.5vw, 2rem); font-weight: 750; line-height: 1.1; letter-spacing: -.035em; }
+.project-cover-content h3 a:hover { color: var(--secondary); }
+.project-description { overflow: hidden; color: hsl(var(--muted-foreground)); font-size: clamp(.78rem, 1.8vw, .92rem); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.project-tags span { padding: .32rem .58rem; border: 1px solid color-mix(in srgb, var(--secondary) 22%, transparent); border-radius: 999px; background: color-mix(in srgb, var(--secondary) 9%, transparent); color: var(--secondary); font-size: .68rem; font-weight: 650; }
+.project-actions { display: flex; align-items: center; gap: .55rem; margin-top: auto; }
+.project-primary-action, .project-icon-action { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-weight: 700; transition: transform .2s, background-color .2s; }
+.project-primary-action { gap: .5rem; min-height: 42px; padding: .65rem 1rem; background: var(--secondary); color: white; font-size: .78rem; }
+.project-icon-action { width: 42px; height: 42px; border: 1px solid hsl(var(--border)); }
+.project-primary-action:hover, .project-icon-action:hover { transform: translateY(-2px); }
+.project-icon-action:hover { background: color-mix(in srgb, var(--secondary) 10%, transparent); color: var(--secondary); }
+.project-carousel-controls { display: flex; align-items: center; justify-content: center; gap: clamp(.8rem, 3vw, 1.5rem); width: min(92vw, 700px); margin: .5rem auto 0; }
+.project-arrow { display: grid !important; flex: 0 0 auto; place-items: center; width: 46px; height: 46px; border: 1px solid hsl(var(--border)); border-radius: 999px; background: hsl(var(--card)); color: hsl(var(--foreground)); box-shadow: 0 8px 24px rgb(0 0 0 / .1); transition: .2s; }
+.project-arrow:hover { border-color: var(--secondary); background: var(--secondary); color: white; transform: scale(1.06); }
+.project-dots { --blossom-dots-gap: .45rem; --blossom-dot-size: .55rem; --blossom-dot-color: var(--secondary); max-width: min(60vw, 350px); overflow: hidden; }
+@keyframes project-cover-rotate { 0% { transform: rotateY(-48deg) scale(.84); opacity: .48; } 50% { transform: rotateY(0) scale(1); opacity: 1; } 100% { transform: rotateY(48deg) scale(.84); opacity: .48; } }
+@keyframes project-cover-shift { 0% { transform: translateX(24%); } 50% { transform: translateX(0); } 100% { transform: translateX(-24%); } }
+
+@supports not (animation-timeline: view()) {
+  .project-cover-slide, .project-cover-card { animation: none; }
+}
+@media (max-width: 640px) {
+  .projects-cover-flow { padding-inline: 8vw !important; }
+  .project-cover-item { width: 84vw; height: min(570px, 145vw); }
+  .project-cover-slide { inset-inline: 0; width: 100%; }
+  .project-cover-image { height: 48%; }
+  .project-cover-content { height: 52%; }
+  @keyframes project-cover-rotate { 0% { transform: rotateY(-24deg) scale(.92); opacity: .65; } 50% { transform: none; opacity: 1; } 100% { transform: rotateY(24deg) scale(.92); opacity: .65; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root), ::view-transition-new(root), ::view-transition-old(root), .dark::view-transition-old(root), .project-cover-slide, .project-cover-card { animation: none !important; }
 }
 
 html {
