@@ -12,13 +12,23 @@ export function DeferredChatBot() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    const browserWindow = window as Window &
+      typeof globalThis & {
+        requestIdleCallback?: (
+          callback: IdleRequestCallback,
+          options?: IdleRequestOptions
+        ) => number;
+        cancelIdleCallback?: (handle: number) => void;
+      };
     const reveal = () => setReady(true);
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(reveal, { timeout: 2500 });
-      return () => window.cancelIdleCallback(idleId);
+    if (browserWindow.requestIdleCallback) {
+      const idleId = browserWindow.requestIdleCallback(reveal, {
+        timeout: 2500,
+      });
+      return () => browserWindow.cancelIdleCallback?.(idleId);
     }
-    const timeoutId = window.setTimeout(reveal, 1800);
-    return () => window.clearTimeout(timeoutId);
+    const timeoutId = browserWindow.setTimeout(reveal, 1800);
+    return () => browserWindow.clearTimeout(timeoutId);
   }, []);
 
   return ready ? <ChatBot /> : null;
