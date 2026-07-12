@@ -101,14 +101,6 @@
   100% { mask-size: 2000vmax; }
 }
 
-.theme-robot-toggle { position: relative; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 999px; color: var(--secondary); transition: background-color .2s, transform .2s; }
-.theme-robot-toggle:hover { background: color-mix(in srgb, var(--secondary) 12%, transparent); transform: translateY(-1px); }
-.theme-robot-heart { position: absolute; top: -7px; right: -1px; color: #ef4444; font-size: 15px; opacity: 0; transform: translateY(8px) scale(.2); }
-.theme-robot-toggle.is-loving .theme-robot { animation: robot-love .7s var(--expo-out) both; }
-.theme-robot-toggle.is-loving .theme-robot-heart { animation: robot-heart .9s var(--expo-out) both; }
-@keyframes robot-love { 40% { transform: translateY(2px) rotate(-7deg) scale(.9); } 70% { transform: translateY(-2px) rotate(7deg) scale(1.08); } }
-@keyframes robot-heart { 25% { opacity: 1; transform: translateY(0) scale(1); } 70% { opacity: 1; transform: translateY(-7px) scale(1.25); } 100% { opacity: 0; transform: translateY(-12px) scale(.8); } }
-
 /* Responsive Blossom cover-flow */
 .projects-section { position: relative; width: 100%; overflow: hidden; padding: clamp(5rem, 9vw, 8rem) 0; isolation: isolate; }
 .projects-heading { position: relative; z-index: 2; width: min(92vw, 760px); margin: 0 auto clamp(2rem, 5vw, 4rem); text-align: center; }

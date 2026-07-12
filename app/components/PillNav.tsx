@@ -38,7 +38,6 @@ export function PillNav() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [themeAnimating, setThemeAnimating] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -89,34 +88,33 @@ export function PillNav() {
         startViewTransition?: (update: () => void) => { finished: Promise<void> };
       };
 
-      setThemeAnimating(true);
       const switchTheme = () => flushSync(() => setTheme(nextTheme));
 
       if (!documentWithTransitions.startViewTransition || reduceMotion) {
         switchTheme();
-        window.setTimeout(() => setThemeAnimating(false), 450);
         return;
       }
 
-      documentWithTransitions.startViewTransition(switchTheme).finished.finally(() => setThemeAnimating(false));
+      documentWithTransitions.startViewTransition(switchTheme);
     };
 
     return (
       <button
         onClick={toggleTheme}
-        className={cn("theme-robot-toggle", themeAnimating && "is-loving")}
+        className="p-2 rounded-full hover:bg-accent transition-colors"
         aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}
         title="Change theme"
       >
-        <span className="theme-robot-heart" aria-hidden="true">♥</span>
-        <svg className="theme-robot" width="25" height="25" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <path d="M16 7V4M13.5 3.5h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <rect x="6" y="7" width="20" height="16" rx="6" fill="currentColor" opacity=".16" stroke="currentColor" strokeWidth="2" />
-          <circle cx="12" cy="15" r="2" fill="currentColor" />
-          <circle cx="20" cy="15" r="2" fill="currentColor" />
-          <path d="M12 19c1.2 1.3 2.5 2 4 2s2.8-.7 4-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M8 24v3M24 24v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
+        {resolvedTheme === "dark" ? (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        ) : (
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        )}
       </button>
     );
   };
