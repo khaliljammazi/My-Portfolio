@@ -15,6 +15,10 @@ export type Project = {
   duration?: string;
   highlights?: string[];
   overview?: string;
+  challenge?: string;
+  solution?: string;
+  impact?: string;
+  metrics?: string[];
 };
 
 export const projects: Project[] = [
@@ -32,6 +36,13 @@ export const projects: Project[] = [
     year: "2025",
     role: "Lead Frontend Developer",
     duration: "6 months",
+    challenge:
+      "Modernize a legacy telecom portal without disrupting SEO, content workflows, or traffic at enterprise scale.",
+    solution:
+      "Rebuilt key experiences in React on top of Liferay DXP, standardized reusable templates, and coordinated the frontend rollout with brand and CMS stakeholders.",
+    impact:
+      "Delivered a faster, more maintainable platform that supported a full rebrand while serving 30M+ monthly visitors with zero-downtime expectations.",
+    metrics: ["30M+ monthly visitors", "+340% performance improvement", "50+ responsive templates"],
     highlights: [
       "+340% performance improvement after migration to React components",
       "Rebuilt 50+ page templates with fully responsive layouts",
@@ -56,6 +67,13 @@ export const projects: Project[] = [
     year: "2024",
     role: "Frontend & 3D Developer",
     duration: "2 weeks",
+    challenge:
+      "Create a visually ambitious product page that still feels smooth, responsive, and performant on the web.",
+    solution:
+      "Built the experience with Three.js, custom WebGL materials, and scroll-linked storytelling that guides users through the product reveal.",
+    impact:
+      "Shipped a portfolio-ready immersive landing page that balances spectacle with usability and graceful fallback behavior.",
+    metrics: ["95+ Lighthouse score", "Responsive 3D storytelling", "2-week delivery"],
     highlights: [
       "Real-time 3D iPhone 17 Pro Max model with PBR materials",
       "Scroll-driven camera animations using GSAP ScrollTrigger",
@@ -80,6 +98,13 @@ export const projects: Project[] = [
     year: "2023",
     role: "Full-Stack Developer",
     duration: "3 months",
+    challenge:
+      "Replace a weak storefront with a faster commerce experience that improves trust, checkout flow, and day-to-day operations.",
+    solution:
+      "Built a Next.js and Node.js commerce platform with Stripe payments, real-time stock handling, and a dashboard for operators.",
+    impact:
+      "Improved conversion performance while giving the business a more scalable sales and operations workflow.",
+    metrics: ["+250% conversion uplift", "Sub-second listing loads", "Stripe + admin tooling"],
     highlights: [
       "+250% conversion rate increase vs. the legacy platform",
       "Secure Stripe payment integration with webhook event handling",
@@ -102,6 +127,13 @@ export const projects: Project[] = [
     year: "2024",
     role: "Full-Stack Mobile Developer",
     duration: "4 months",
+    challenge:
+      "Support social features, realtime communication, and discovery in a mobile app expected to scale quickly.",
+    solution:
+      "Combined React Native, Firebase, GraphQL, and Expo services to deliver chat, notifications, and feed performance across platforms.",
+    impact:
+      "Helped ship a large-scale social product capable of supporting hundreds of thousands of active users.",
+    metrics: ["500K+ active users", "60% less over-fetching", "Realtime chat + push"],
     highlights: [
       "500K+ active users at peak with Firebase Realtime Database",
       "GraphQL API layer reducing over-fetching by 60%",
@@ -124,6 +156,13 @@ export const projects: Project[] = [
     year: "2024",
     role: "Full-Stack Developer",
     duration: "8 months",
+    challenge:
+      "Give enterprise teams a simpler way to design and automate complex internal workflows.",
+    solution:
+      "Built a full-stack workflow platform with a visual builder, integrations, collaboration, and performance-minded backend architecture.",
+    impact:
+      "Reduced process completion time and created a clearer automation layer for business teams.",
+    metrics: ["65% faster processes", "20+ integrations", "8-month product build"],
     highlights: [
       "Built visual workflow designer with drag-and-drop interface",
       "Implemented real-time collaboration features using WebSockets",
@@ -146,6 +185,13 @@ export const projects: Project[] = [
     year: "2023",
     role: "Backend Developer",
     duration: "6 months",
+    challenge:
+      "Reduce client-side complexity across multiple frontend consumers in a large telecom ecosystem.",
+    solution:
+      "Designed a dynamic BFF layer that aggregates microservices, transforms responses, and uses caching to optimize payload delivery.",
+    impact:
+      "Lowered response latency and improved frontend delivery consistency across web and mobile applications.",
+    metrics: ["40% faster responses", "15+ services aggregated", "2M+ daily active users"],
     highlights: [
       "Reduced API response times by 40% through intelligent caching",
       "Built GraphQL layer aggregating 15+ microservices",
@@ -168,6 +214,13 @@ export const projects: Project[] = [
     year: "2023",
     role: "Mobile Developer",
     duration: "10 months",
+    challenge:
+      "Support a broad mobile customer journey in regions where connectivity and reliability matter.",
+    solution:
+      "Built key app modules with React Native and TypeScript, including payments, notifications, and offline-sensitive flows.",
+    impact:
+      "Contributed to a stronger super-app experience with dependable transactions and customer engagement.",
+    metrics: ["1M+ monthly transactions", "95% notification delivery", "4.5+ store rating"],
     highlights: [
       "Developed core payment module handling 1M+ monthly transactions",
       "Implemented push notification system with 95% delivery rate",
@@ -189,6 +242,13 @@ export const projects: Project[] = [
     year: "2022",
     role: "Team Lead & Developer",
     duration: "5 months",
+    challenge:
+      "Turn dense operational data into dashboards decision-makers could actually use across devices and export formats.",
+    solution:
+      "Led a small team building responsive Qlik dashboards with custom D3.js extensions and export capabilities.",
+    impact:
+      "Delivered clearer analytics workflows and more flexible reporting for airline stakeholders.",
+    metrics: ["Team of 3 led", "Custom D3 visualizations", "Multi-format export suite"],
     highlights: [
       "Led a team of 3 developers ensuring quality deliverables",
       "Developed custom responsive dashboards and chart extensions",

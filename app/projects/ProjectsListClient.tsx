@@ -202,6 +202,18 @@ export default function ProjectsListClient() {
                     <p className="text-sm text-[hsl(var(--muted-foreground))] mb-4 line-clamp-2">
                       {project.shortDescription}
                     </p>
+                    {project.metrics && project.metrics.length > 0 && (
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        {project.metrics.slice(0, 2).map((metric) => (
+                          <span
+                            key={metric}
+                            className="rounded-full border border-[var(--secondary)]/20 bg-[var(--secondary)]/10 px-2.5 py-1 text-[11px] font-semibold text-[var(--secondary)]"
+                          >
+                            {metric}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">

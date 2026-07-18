@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { profileStats } from "@/data/profile";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -23,75 +24,73 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
     requestAnimationFrame(step);
   }, [isInView, target]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
-
-const portfolioStats = [
-  { label: "Years Experience", value: 3, suffix: "+" },
-  { label: "Projects Delivered", value: 20, suffix: "+" },
-  { label: "Technologies", value: 15, suffix: "" },
-  { label: "Happy Clients", value: 10, suffix: "+" },
-];
 
 const techStack = [
   { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
   { name: "Next.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-  {name : "Vue.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"},
-  {name : "Nuxt.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg"},
-  {name : "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"},
+  { name: "Vue.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
+  { name: "Nuxt.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg" },
+  { name: "Angular", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
   { name: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
   { name: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
   { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
   { name: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
   { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
   { name: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-  { name: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
   { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-  { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
   { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+];
+
+const proofCards = [
+  {
+    title: "Product-minded engineering",
+    text: "I focus on interfaces that are fast to understand, fast to load, and fast to maintain.",
+  },
+  {
+    title: "Enterprise and startup range",
+    text: "I can work inside complex delivery environments without losing attention to UI detail and user flow.",
+  },
 ];
 
 export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  
-  // Parallax effects
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const avatarY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-  const cardsX = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  
-  // Duplicate the array for seamless loop
+  const cardsX = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
   const duplicatedStack = [...techStack, ...techStack];
 
   return (
-    <section ref={sectionRef} id="about" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="relative overflow-hidden px-4 py-12 md:px-6 md:py-24">
       <div className="container mx-auto max-w-6xl">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-10 md:mb-16"
+          className="mb-10 text-center md:mb-16"
         >
-          {/* Avatar */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             style={{ y: avatarY }}
-            className="flex justify-center mb-6 md:mb-8"
+            className="mb-6 flex justify-center md:mb-8"
           >
-            <div className="relative group">
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
-              
-              {/* Avatar container */}
-              <div className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full border-2 md:border-4 border-[hsl(var(--background))] overflow-hidden shadow-2xl">
+            <div className="group relative">
+              <div className="absolute -inset-1 animate-pulse rounded-full bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] blur-lg opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-[hsl(var(--background))] shadow-2xl sm:h-32 sm:w-32 md:h-40 md:w-40 md:border-4">
                 <Image
                   src="/img/avatar.jpg"
                   alt="Jammazi Khalil"
@@ -101,98 +100,96 @@ export function AboutSection() {
                   priority
                 />
               </div>
-              
             </div>
           </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
+          <h2 className="mb-4 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-3xl font-bold text-transparent sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
             About Me
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto leading-relaxed px-4">
-            I'm <span className="text-[var(--secondary)] font-semibold">Khalil Jammazi</span>,
-            a passionate software developer specializing in building modern web applications. 
-            I love turning complex problems into simple, beautiful, and intuitive solutions.
+          <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-lg md:text-xl">
+            I&apos;m <span className="font-semibold text-[var(--secondary)]">Khalil Jammazi</span>, a full-stack developer building modern web platforms, immersive interfaces, and scalable digital products with a strong eye for clarity and performance.
           </p>
         </motion.div>
 
-        {/* Bio Grid */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           style={{ x: cardsX }}
-          className="grid md:grid-cols-2 gap-4 md:gap-8 mb-12 md:mb-20"
+          className="mb-12 grid gap-4 md:mb-20 md:grid-cols-2 md:gap-8"
         >
-          <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">What I Do</h3>
-            <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
-              I design and develop full-stack web applications with a focus on user experience, 
-              performance, and scalability. From responsive frontends to robust backends, 
-              I bring ideas to life with clean, maintainable code.
+          <div className="rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-5 transition-colors hover:border-[var(--secondary)] md:rounded-2xl md:p-8">
+            <h3 className="mb-3 text-lg font-bold text-[hsl(var(--foreground))] sm:text-xl md:mb-4 md:text-2xl">What I bring</h3>
+            <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base">
+              I turn product ideas into interfaces and systems that feel intentional, responsive, and production-ready. That includes clean frontends, dependable backend integrations, and thoughtful user flows.
             </p>
           </div>
 
-          <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">Tech Stack</h3>
-            <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
-              I work with modern technologies including React, Next.js, TypeScript, Node.js, 
-              and various databases. I'm always learning and adapting to new tools and frameworks.
+          <div className="rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-5 transition-colors hover:border-[var(--secondary)] md:rounded-2xl md:p-8">
+            <h3 className="mb-3 text-lg font-bold text-[hsl(var(--foreground))] sm:text-xl md:mb-4 md:text-2xl">What I optimize for</h3>
+            <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base">
+              Performance, maintainability, and strong visual polish. I like shipping work that looks sharp, solves a real problem, and stays easy to build on.
             </p>
           </div>
         </motion.div>
 
-        {/* Animated Stats */}
+        <div className="mb-12 grid gap-4 md:mb-16 md:grid-cols-2">
+          {proofCards.map((card, index) => (
+            <motion.article
+              key={card.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              className="rounded-2xl border border-[var(--brand-border)] bg-[linear-gradient(135deg,var(--brand-soft-1),transparent)] p-6"
+            >
+              <h3 className="mb-2 text-lg font-semibold text-[hsl(var(--foreground))]">{card.title}</h3>
+              <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))]">{card.text}</p>
+            </motion.article>
+          ))}
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 md:mb-20"
+          className="mb-12 grid grid-cols-2 gap-4 md:mb-20 md:grid-cols-4"
         >
-          {portfolioStats.map((stat) => (
+          {profileStats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl p-4 md:p-6 text-center hover:border-[var(--secondary)] transition-colors group"
+              className="group rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-4 text-center transition-colors hover:border-[var(--secondary)] md:p-6"
             >
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent mb-1">
+              <div className="mb-1 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="text-xs md:text-sm text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--foreground))] transition-colors">
+              <div className="text-xs text-[hsl(var(--muted-foreground))] transition-colors group-hover:text-[hsl(var(--foreground))] md:text-sm">
                 {stat.label}
               </div>
             </div>
           ))}
         </motion.div>
 
-        {/* Tech Stack Title */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="text-center mb-8 md:mb-12"
+          className="mb-8 text-center md:mb-12"
         >
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[hsl(var(--foreground))] mb-2">
-            Technologies
-          </h3>
-          <p className="text-sm md:text-base text-[hsl(var(--muted-foreground))]">
-            Tools and Frameworks I work with
-          </p>
+          <h3 className="mb-2 text-xl font-bold text-[hsl(var(--foreground))] sm:text-2xl md:text-3xl">Technologies</h3>
+          <p className="text-sm text-[hsl(var(--muted-foreground))] md:text-base">Tools and frameworks I use to ship product work across web, mobile, and data interfaces.</p>
         </motion.div>
 
-        {/* Logo Loop */}
         <div className="relative overflow-hidden py-8 md:py-12">
-          {/* Gradient overlays for fade effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[hsl(var(--background))] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[hsl(var(--background))] to-transparent z-10" />
+          <div className="absolute top-0 bottom-0 left-0 z-10 w-16 bg-gradient-to-r from-[hsl(var(--background))] to-transparent md:w-32" />
+          <div className="absolute top-0 right-0 bottom-0 z-10 w-16 bg-gradient-to-l from-[hsl(var(--background))] to-transparent md:w-32" />
 
-          {/* Animated Logo Strip */}
           <motion.div
             className="flex gap-8 md:gap-16"
-            animate={{
-              x: [0, -50 * techStack.length],
-            }}
+            animate={{ x: [0, -50 * techStack.length] }}
             transition={{
               x: {
                 repeat: Infinity,
@@ -205,38 +202,18 @@ export function AboutSection() {
             {duplicatedStack.map((tech, index) => (
               <div
                 key={`${tech.name}-${index}`}
-                className="flex-shrink-0 w-16 md:w-24 h-16 md:h-24 flex flex-col items-center justify-center gap-2 md:gap-3 group"
+                className="flex h-16 w-16 flex-shrink-0 flex-col items-center justify-center gap-2 group md:h-24 md:w-24 md:gap-3"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 relative flex items-center justify-center bg-[hsl(var(--card))] rounded-xl md:rounded-2xl border border-[hsl(var(--border))] group-hover:border-[var(--secondary)] transition-all group-hover:scale-110">
-                  <img
-                    src={tech.logo}
-                    alt={tech.name}
-                    className="w-7 h-7 md:w-10 md:h-10 object-contain filter grayscale group-hover:grayscale-0 transition-all"
-                  />
+                <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] transition-all group-hover:scale-110 group-hover:border-[var(--secondary)] md:h-16 md:w-16 md:rounded-2xl">
+                  <img src={tech.logo} alt={tech.name} className="h-7 w-7 object-contain grayscale transition-all group-hover:grayscale-0 md:h-10 md:w-10" />
                 </div>
-                <span className="text-xs font-medium text-[hsl(var(--muted-foreground))] group-hover:text-[var(--secondary)] transition-colors text-center">
+                <span className="text-center text-xs font-medium text-[hsl(var(--muted-foreground))] transition-colors group-hover:text-[var(--secondary)]">
                   {tech.name}
                 </span>
               </div>
             ))}
           </motion.div>
         </div>
-
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center mt-12 md:mt-16"
-        >
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-full bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform shadow-lg"
-          >
-            Let's Work Together
-          </a>
-        </motion.div>
       </div>
     </section>
   );
