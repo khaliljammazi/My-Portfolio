@@ -1,12 +1,12 @@
 "use client";
 
-import { projects } from "@/data/projects";
 import { BlossomCarousel, BlossomDots, BlossomNext, BlossomPrev } from "@blossom-carousel/react";
-import { motion } from "motion/react";
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState, type UIEvent } from "react";
+import { motion } from "motion/react";
+import { projects } from "@/data/projects";
+import { useMemo, useState } from "react";
 
 const carouselId = "projects-cover-flow";
 const filters = ["All", "Frontend", "Full Stack", "Mobile", "Data"] as const;
@@ -22,24 +22,20 @@ function projectCategory(tags: string[]) {
 export default function Projects() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [activeIndex, setActiveIndex] = useState(0);
-
   const visibleProjects = useMemo(
     () => projects.filter((project) => filter === "All" || projectCategory(project.tags) === filter),
     [filter]
   );
 
-  const trackActiveProject = (event: UIEvent<HTMLElement>) => {
+  const trackActiveProject = (event: React.UIEvent<HTMLElement>) => {
     const carousel = event.currentTarget;
     const center = carousel.getBoundingClientRect().left + carousel.clientWidth / 2;
     const slides = Array.from(carousel.querySelectorAll<HTMLElement>("[data-blossom-slide]"));
-    const closest = slides.reduce(
-      (best, slide, index) => {
-        const rect = slide.getBoundingClientRect();
-        const distance = Math.abs(rect.left + rect.width / 2 - center);
-        return distance < best.distance ? { index, distance } : best;
-      },
-      { index: 0, distance: Number.POSITIVE_INFINITY }
-    );
+    const closest = slides.reduce((best, slide, index) => {
+      const rect = slide.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - center);
+      return distance < best.distance ? { index, distance } : best;
+    }, { index: 0, distance: Number.POSITIVE_INFINITY });
     setActiveIndex(closest.index);
   };
 
@@ -62,7 +58,7 @@ export default function Projects() {
       >
         <span className="projects-kicker">Selected work</span>
         <h2 id="projects-title">My Projects</h2>
-        <p>Drag, swipe, or use the controls to explore.</p>
+        <p>Drag, swipe, or use the controls to explore each case study.</p>
       </motion.div>
 
       <div className="project-filters" aria-label="Filter projects">
@@ -79,23 +75,12 @@ export default function Projects() {
         ))}
       </div>
 
-      <BlossomCarousel
-        key={filter}
-        id={carouselId}
-        as="ul"
-        className="projects-cover-flow"
-        aria-label={`${filter} projects`}
-        onScroll={trackActiveProject}
-      >
+      <BlossomCarousel key={filter} id={carouselId} as="ul" className="projects-cover-flow" aria-label={`${filter} projects`} onScroll={trackActiveProject}>
         {visibleProjects.map((project) => (
           <li key={project.slug} data-blossom-slide className="project-cover-item">
             <div className="project-cover-slide">
               <article className="project-cover-card">
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="project-cover-image"
-                  aria-label={`View the ${project.title} case study`}
-                >
+                <Link href={`/projects/${project.slug}`} className="project-cover-image" tabIndex={-1} aria-hidden="true">
                   <Image
                     src={project.image}
                     alt=""
@@ -115,41 +100,20 @@ export default function Projects() {
                     </h3>
                   </div>
                   <p className="project-description">{project.shortDescription || project.description}</p>
-                  {project.metrics && project.metrics.length > 0 && (
-                    <div className="project-metric-list" aria-label="Project results">
-                      {project.metrics.slice(0, 3).map((metric) => (
-                        <span key={metric}>{metric}</span>
-                      ))}
-                    </div>
-                  )}
                   <div className="project-tags" aria-label="Technologies used">
-                    {project.tags.slice(0, 4).map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
+                    {project.tags.slice(0, 4).map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
                   <div className="project-actions">
                     <Link href={`/projects/${project.slug}`} className="project-primary-action">
                       View case study <ExternalLink size={16} aria-hidden="true" />
                     </Link>
                     {project.githubUrl && (
-                      <Link
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${project.title} on GitHub`}
-                        className="project-icon-action"
-                      >
+                      <Link href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.title} on GitHub`} className="project-icon-action">
                         <Github size={18} aria-hidden="true" />
                       </Link>
                     )}
                     {project.liveUrl && (
-                      <Link
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${project.title} live site`}
-                        className="project-icon-action"
-                      >
+                      <Link href={project.liveUrl} target="_blank" rel="noreferrer" aria-label={`${project.title} live site`} className="project-icon-action">
                         <ExternalLink size={18} aria-hidden="true" />
                       </Link>
                     )}
@@ -174,9 +138,7 @@ export default function Projects() {
       </div>
       <div className="project-progress" aria-live="polite">
         <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-        <div aria-hidden="true">
-          <i style={{ width: `${((activeIndex + 1) / visibleProjects.length) * 100}%` }} />
-        </div>
+        <div aria-hidden="true"><i style={{ width: `${((activeIndex + 1) / visibleProjects.length) * 100}%` }} /></div>
         <span>{String(visibleProjects.length).padStart(2, "0")}</span>
       </div>
     </section>

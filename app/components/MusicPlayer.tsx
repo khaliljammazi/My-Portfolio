@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Music, Volume2, VolumeX, Pause, Play } from "lucide-react";
 import { useMusicContext } from "../context/MusicContext";
 

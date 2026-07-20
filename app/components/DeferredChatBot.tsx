@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-
 const ChatBot = dynamic(
   () => import("./ChatBot").then((module) => module.ChatBot),
   { ssr: false }

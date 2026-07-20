@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 
