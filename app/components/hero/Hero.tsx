@@ -14,7 +14,7 @@ export function Hero() {
   const isDark = resolvedTheme !== "light";
   const liquidColors = isDark
     ? ["#ef4444", "#f87171", "#dc2626"]
-    : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
+    : ["#1e3a8a", "#1d4ed8", "#3b82f6"]; 
 
   const stats = [
     { label: "Years building products", value: "3+" },
