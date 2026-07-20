@@ -13,7 +13,7 @@ const experience = [
     role: "Lead Frontend Developer",
     company: "Maroc Telecom (IAM)",
     period: "2024 – 2025",
-    location: "tunis, Tunisia (Remote)",
+    location: "Tunis, Tunisia (Remote)",
     bullets: [
       "Rebuilt iam.ma using Liferay DXP + React, achieving +340% performance improvement",
       "Designed and developed 50+ responsive page templates serving 30M+ monthly visitors",

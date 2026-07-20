@@ -21,13 +21,13 @@ function getSmartResponse(message: string): string {
   if (/\b(contact|hire|freelance|together|reach|available|work with)\b/.test(m))
     return "Khalil is open to freelance work! Head to the Contact page or email khalil.jammazi366@gmail.com directly.";
   if (/\b(experience|year|background|about)\b/.test(m))
-    return "Khalil has 3+ years building modern web applications — from responsive frontends to scalable backends. Based in Morocco, working with clients globally.";
+    return "Khalil has 3+ years building modern web applications — from responsive frontends to scalable backends. Based in Tunisia, working with clients globally.";
   if (/\b(resume|cv|download)\b/.test(m))
     return "Click the Resume button in the navigation bar at the top of the page to download it!";
   if (/\b(price|cost|rate|budget|charge|fee)\b/.test(m))
     return "Rates vary by project scope and complexity. Use the Contact form to describe your project and get a custom quote!";
-  if (/\b(location|where|country|timezone|based|morocco)\b/.test(m))
-    return "Khalil is based in Morocco 🇲🇦 and works remotely with clients worldwide across all time zones.";
+  if (/\b(location|where|country|timezone|based|tunisia)\b/.test(m))
+    return "Khalil is based in Tunisia 🇹🇳 and works remotely with clients worldwide across all time zones.";
   if (/\b(name|who are you|who is)\b/.test(m))
     return "Khalil Jammazi — a full-stack developer passionate about building fast, beautiful, and scalable web applications.";
   if (/\b(3d|threejs|three\.js|webgl)\b/.test(m))
