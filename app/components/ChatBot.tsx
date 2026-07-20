@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { X, Send, MessageCircle, Bot } from "lucide-react";
 import { Robot3D } from "./Robot3D";
 
@@ -15,23 +15,23 @@ function getSmartResponse(message: string): string {
   if (/\b(hello|hi|hey|sup|howdy)\b/.test(m))
     return "Hey there! 👋 Ask me about Khalil's skills, projects, experience, or how to get in touch.";
   if (/\b(project|work|portfolio|built|created|showcase)\b/.test(m))
-    return "Featured work includes the Maroc Telecom rebranding (Liferay + React, +340% performance) and a Three.js 3D iPhone landing page. Scroll to the Projects section to see more!";
+    return "Featured work: the Maroc Telecom rebranding (Liferay + React, +340% performance) and a Three.js 3D iPhone landing page. See the Projects section for more!";
   if (/\b(skill|tech|stack|language|framework|tool)\b/.test(m))
-    return "Khalil works with React, Next.js, Vue.js, TypeScript, Node.js, Three.js, MongoDB, PostgreSQL, Docker, and more. Full list in the About section!";
+    return "React, Next.js, Vue.js, TypeScript, Node.js, Three.js, MongoDB, PostgreSQL, Docker, and more. Full list in the About section!";
   if (/\b(contact|hire|freelance|together|reach|available|work with)\b/.test(m))
-    return "Khalil is open to freelance work! Head to the Contact page or email khalil.jammazi366@gmail.com directly.";
+    return "Khalil is open to freelance work! Use the Contact page or email khalil.jammazi366@gmail.com directly.";
   if (/\b(experience|year|background|about)\b/.test(m))
-    return "Khalil has 3+ years building modern web applications — from responsive frontends to scalable backends. Based in Morocco, working with clients globally.";
+    return "3+ years building modern web apps, from responsive frontends to scalable backends. Based in Tunisia, working remotely with clients worldwide.";
   if (/\b(resume|cv|download)\b/.test(m))
     return "Click the Resume button in the navigation bar at the top of the page to download it!";
   if (/\b(price|cost|rate|budget|charge|fee)\b/.test(m))
     return "Rates vary by project scope and complexity. Use the Contact form to describe your project and get a custom quote!";
-  if (/\b(location|where|country|timezone|based|morocco)\b/.test(m))
-    return "Khalil is based in Morocco 🇲🇦 and works remotely with clients worldwide across all time zones.";
+  if (/\b(location|where|country|timezone|based|tunisia|morocco)\b/.test(m))
+    return "Khalil is based in Tunisia 🇹🇳 and works remotely with clients worldwide across all time zones.";
   if (/\b(name|who are you|who is)\b/.test(m))
     return "Khalil Jammazi — a full-stack developer passionate about building fast, beautiful, and scalable web applications.";
   if (/\b(3d|threejs|three\.js|webgl)\b/.test(m))
-    return "Khalil builds immersive 3D experiences with Three.js and WebGL — including this portfolio's liquid hero animation and a 3D iPhone showcase!";
+    return "Khalil builds immersive 3D experiences with Three.js and WebGL, including this portfolio's liquid hero animation and a 3D iPhone showcase!";
 
   const fallbacks = [
     "Great question! For more details, explore the sections below or use the Contact form.",

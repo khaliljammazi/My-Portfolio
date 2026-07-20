@@ -12,9 +12,9 @@ export const profile = {
   availability: "Open to freelance and full-time opportunities",
   responseTime: "Usually replies within 1-2 business days",
   currentFocus: [
-    "Shipping fast, polished frontend experiences with measurable performance gains",
-    "Building scalable full-stack products with React, Next.js, Node.js, and modern APIs",
-    "Creating mobile and data-heavy interfaces that stay clear under real-world complexity",
+    "Fast, polished frontend experiences with measurable performance gains",
+    "Scalable full-stack products with React, Next.js, Node.js, and modern APIs",
+    "Mobile and data-heavy interfaces that stay clear under real-world complexity",
   ],
 } as const;
 
@@ -32,12 +32,12 @@ export const experience = [
     period: "2024 - 2025",
     location: "Tunis, Tunisia (Remote)",
     summary:
-      "Led the frontend rebuild of iam.ma and delivered a large-scale rebrand rollout across a telecom platform serving millions of users.",
+      "Led the iam.ma frontend rebuild and a large-scale rebrand rollout for a telecom platform serving millions.",
     bullets: [
-      "Rebuilt iam.ma using Liferay DXP and React with a reported +340% performance improvement",
-      "Designed and shipped 50+ responsive page templates for a high-traffic enterprise platform",
-      "Integrated internal APIs, CMS workflows, and content operations for editorial teams",
-      "Rolled out the refreshed digital brand system across key customer touchpoints",
+      "Rebuilt iam.ma with Liferay DXP and React; +340% reported performance gain",
+      "Designed and shipped 50+ responsive templates for a high-traffic platform",
+      "Integrated internal APIs, CMS workflows, and editorial content operations",
+      "Rolled out the refreshed brand system across key customer touchpoints",
     ],
   },
   {
@@ -46,12 +46,12 @@ export const experience = [
     period: "2022 - Present",
     location: "Remote",
     summary:
-      "Delivered full-stack products for clients across e-commerce, fintech, media, and product marketing.",
+      "Full-stack products for clients across e-commerce, fintech, media, and product marketing.",
     bullets: [
-      "Built end-to-end web and mobile applications for international clients",
-      "Developed an e-commerce experience that improved conversion rate by 250%",
-      "Contributed to mobile and web products serving hundreds of thousands of active users",
-      "Created immersive 3D product storytelling experiences using Three.js and WebGL",
+      "Built end-to-end web and mobile apps for international clients",
+      "Delivered an e-commerce experience that lifted conversion by 250%",
+      "Shipped products serving hundreds of thousands of active users",
+      "Created immersive 3D product storytelling with Three.js and WebGL",
     ],
   },
 ] as const;
@@ -79,22 +79,22 @@ export const workingStyle = [
   {
     title: "Clarity Before Complexity",
     description:
-      "I break product ideas into clear flows, practical architecture, and interfaces that stay intuitive under pressure.",
+      "Clear flows, practical architecture, and interfaces that stay intuitive under pressure.",
   },
   {
     title: "Performance As A Feature",
     description:
-      "I care about fast loading, responsive interaction, and smooth delivery because product quality is something users feel immediately.",
+      "Fast loading and smooth interaction. Users feel performance immediately.",
   },
   {
     title: "Build For Teams",
     description:
-      "I write maintainable code, structure components for reuse, and make handoff easier for designers, product teams, and future developers.",
+      "Maintainable code, reusable components, and easy handoff for design and product teams.",
   },
 ] as const;
 
 export const credibilityHighlights = [
   "Enterprise experience across telecom, aviation, finance, and technology",
-  "Hands-on with web, mobile, 3D, and analytics-driven product interfaces",
-  "Comfortable moving from design-sensitive UI work to backend integrations and shipping",
+  "Hands-on across web, mobile, 3D, and analytics-driven interfaces",
+  "Moves easily from design-sensitive UI to backend integration and shipping",
 ] as const;

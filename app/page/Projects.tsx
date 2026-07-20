@@ -62,7 +62,7 @@ export default function Projects() {
       >
         <span className="projects-kicker">Selected work</span>
         <h2 id="projects-title">My Projects</h2>
-        <p>Drag, swipe, or use the controls to explore each case study.</p>
+        <p>Drag, swipe, or use the controls to explore.</p>
       </motion.div>
 
       <div className="project-filters" aria-label="Filter projects">
@@ -91,7 +91,11 @@ export default function Projects() {
           <li key={project.slug} data-blossom-slide className="project-cover-item">
             <div className="project-cover-slide">
               <article className="project-cover-card">
-                <Link href={`/projects/${project.slug}`} className="project-cover-image" tabIndex={-1} aria-hidden="true">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="project-cover-image"
+                  aria-label={`View the ${project.title} case study`}
+                >
                   <Image
                     src={project.image}
                     alt=""

@@ -1,15 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 
+const SESSION_KEY = "kj-loader-seen";
+
 export function LoadingScreen() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(false), 2000);
-    return () => clearTimeout(t);
+    if (sessionStorage.getItem(SESSION_KEY)) return;
+    sessionStorage.setItem(SESSION_KEY, "1");
+    const show = requestAnimationFrame(() => setVisible(true));
+    const hide = setTimeout(() => setVisible(false), 2000);
+    return () => {
+      cancelAnimationFrame(show);
+      clearTimeout(hide);
+    };
   }, []);
 
   return (

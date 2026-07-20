@@ -1,7 +1,7 @@
 "use client";
 
 import { experience } from "@/data/profile";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function ExperienceSection() {
   return (
@@ -16,7 +16,7 @@ export function ExperienceSection() {
         >
           <span>Experience timeline</span>
           <h2>Selected experience and product impact</h2>
-          <p>Enterprise delivery, product execution, and performance-minded frontend engineering across client and freelance work.</p>
+          <p>Enterprise delivery and product-focused engineering, from telecom platforms to freelance products.</p>
         </motion.div>
 
         <div className="timeline-list">
@@ -36,9 +36,9 @@ export function ExperienceSection() {
               </div>
               <div className="timeline-content">
                 <p className="timeline-company">{job.company}</p>
-                <h3>{job.role}</h3>
-                <p>{job.summary}</p>
-                <ul>
+                <h3 className="tracking-tight">{job.role}</h3>
+                <p className="text-sm">{job.summary}</p>
+                <ul className="text-sm">
                   {job.bullets.map((bullet) => (
                     <li key={bullet}>{bullet}</li>
                   ))}

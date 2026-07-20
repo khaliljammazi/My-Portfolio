@@ -49,6 +49,9 @@ export default function ProjectsListClient() {
     setSelectedTags([]);
   };
 
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--secondary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(var(--background))]";
+
   return (
     <main className="min-h-screen pt-24 pb-16 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
@@ -59,12 +62,14 @@ export default function ProjectsListClient() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
+          <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--secondary-text)]">
+            Case studies
+          </p>
+          <h1 className="mt-3 text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
             All Projects
           </h1>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
-            Explore my portfolio of web development projects, from enterprise
-            applications to innovative mobile apps.
+            Enterprise platforms, e-commerce, and interactive apps — searchable by name, description, or technology.
           </p>
         </motion.div>
 
@@ -75,23 +80,25 @@ export default function ProjectsListClient() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8"
         >
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
+          <div className="flex flex-col md:flex-row gap-3 items-center justify-center">
             {/* Search Input */}
             <div className="relative w-full md:w-96">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[hsl(var(--muted-foreground))]" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[hsl(var(--muted-foreground))]" aria-hidden="true" />
               <input
                 type="text"
                 placeholder="Search projects..."
+                aria-label="Search projects"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-full bg-[hsl(var(--card))] border border-[hsl(var(--border))] focus:border-[var(--secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--secondary)]/20 transition-all text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))]"
+                className="w-full pl-12 pr-10 py-3 rounded-full bg-[hsl(var(--card))] border border-[hsl(var(--border))] focus:border-[var(--secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--secondary)]/25 transition-all text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))]"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]"
+                  aria-label="Clear search"
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] ${focusRing}`}
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4" aria-hidden="true" />
                 </button>
               )}
             </div>
@@ -99,13 +106,15 @@ export default function ProjectsListClient() {
             {/* Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-full border transition-all ${
+              aria-expanded={showFilters}
+              aria-controls="project-tag-filters"
+              className={`flex items-center gap-2 px-5 py-3 rounded-full border transition-all ${focusRing} ${
                 showFilters || selectedTags.length > 0
                   ? "bg-[var(--secondary)] border-[var(--secondary)] text-white"
                   : "bg-[hsl(var(--card))] border-[hsl(var(--border))] hover:border-[var(--secondary)]"
               }`}
             >
-              <Filter className="w-4 h-4" />
+              <Filter className="w-4 h-4" aria-hidden="true" />
               <span>Filter</span>
               {selectedTags.length > 0 && (
                 <span className="bg-white/20 px-2 py-0.5 rounded-full text-sm">
@@ -118,7 +127,7 @@ export default function ProjectsListClient() {
             {(searchQuery || selectedTags.length > 0) && (
               <button
                 onClick={clearFilters}
-                className="text-[var(--secondary)] hover:underline text-sm"
+                className={`rounded-full px-2 py-1 text-sm text-[var(--secondary)] hover:underline ${focusRing}`}
               >
                 Clear all
               </button>
@@ -128,16 +137,18 @@ export default function ProjectsListClient() {
           {/* Tags Filter */}
           {showFilters && (
             <motion.div
+              id="project-tag-filters"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="mt-6 flex flex-wrap gap-2 justify-center"
+              className="mt-5 flex flex-wrap gap-2 justify-center"
             >
               {allTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => toggleTag(tag)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  aria-pressed={selectedTags.includes(tag)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${focusRing} ${
                     selectedTags.includes(tag)
                       ? "bg-[var(--secondary)] text-white"
                       : "bg-[hsl(var(--card))] border border-[hsl(var(--border))] hover:border-[var(--secondary)] text-[hsl(var(--foreground))]"
@@ -154,7 +165,8 @@ export default function ProjectsListClient() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center text-[hsl(var(--muted-foreground))] mb-8"
+          aria-live="polite"
+          className="text-center text-sm text-[hsl(var(--muted-foreground))] mb-8"
         >
           Showing {filteredProjects.length} of {projects.length} projects
         </motion.p>
@@ -168,8 +180,11 @@ export default function ProjectsListClient() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
             >
-              <Link href={`/projects/${project.slug}`}>
-                <article className="group relative bg-[hsl(var(--card))] rounded-2xl overflow-hidden border border-[hsl(var(--border))] hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--secondary)]/10 hover:-translate-y-1">
+              <Link
+                href={`/projects/${project.slug}`}
+                className={`block rounded-2xl ${focusRing}`}
+              >
+                <article className="group relative bg-[hsl(var(--card))] rounded-2xl overflow-hidden border border-[hsl(var(--border))] hover:border-[var(--secondary)] group-focus-visible:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--secondary)]/10 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
@@ -180,14 +195,14 @@ export default function ProjectsListClient() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    
+
                     {/* Featured Badge */}
                     {project.featured && (
                       <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[var(--secondary)] text-white text-xs font-semibold">
                         Featured
                       </span>
                     )}
-                    
+
                     {/* Year Badge */}
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium">
                       {project.year}
@@ -196,6 +211,11 @@ export default function ProjectsListClient() {
 
                   {/* Content */}
                   <div className="p-5">
+                    {project.role && (
+                      <p className="mb-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[var(--secondary-text)]">
+                        {project.role}
+                      </p>
+                    )}
                     <h3 className="text-xl font-bold mb-2 text-[hsl(var(--foreground))] group-hover:text-[var(--secondary)] transition-colors">
                       {project.title}
                     </h3>
@@ -214,7 +234,7 @@ export default function ProjectsListClient() {
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map((tag) => (
@@ -252,7 +272,9 @@ export default function ProjectsListClient() {
             animate={{ opacity: 1 }}
             className="text-center py-16"
           >
-            <div className="text-6xl mb-4">🔍</div>
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--card))]">
+              <Search className="h-7 w-7 text-[var(--secondary)]" aria-hidden="true" />
+            </div>
             <h3 className="text-xl font-semibold mb-2 text-[hsl(var(--foreground))]">
               No projects found
             </h3>
@@ -261,7 +283,7 @@ export default function ProjectsListClient() {
             </p>
             <button
               onClick={clearFilters}
-              className="px-6 py-2 rounded-full bg-[var(--secondary)] text-white hover:opacity-90 transition-opacity"
+              className={`px-6 py-2 rounded-full bg-[var(--secondary)] text-white hover:opacity-90 transition-opacity ${focusRing}`}
             >
               Clear filters
             </button>

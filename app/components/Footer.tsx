@@ -40,7 +40,7 @@ export function Footer() {
               Khalil Jammazi
             </h3>
             <p className="text-[hsl(var(--muted-foreground))] text-xs md:text-sm max-w-xs mx-auto md:mx-0">
-              Full-stack developer passionate about creating beautiful and functional web applications.
+              Full-stack developer building fast, polished web products.
             </p>
           </div>
 

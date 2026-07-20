@@ -2,7 +2,7 @@
 
 import { profile } from "@/data/profile";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const actions = [
   { label: "Email me", href: `mailto:${profile.email}`, icon: Mail },
@@ -24,9 +24,9 @@ export function AvailabilitySection() {
         >
           <div>
             <span className="availability-badge">{profile.availability}</span>
-            <h2>Ready for product-focused freelance work and full-time roles</h2>
+            <h2>Open to freelance projects and full-time roles</h2>
             <p>
-              If you need a developer who can move between product thinking, polished frontend work, and practical full-stack delivery, let&apos;s talk.
+              Product thinking, polished frontend, and practical full-stack delivery — in one developer. Let&apos;s talk.
             </p>
             <div className="availability-meta">
               <span>{profile.location}</span>
@@ -41,7 +41,7 @@ export function AvailabilitySection() {
                 <a
                   key={action.label}
                   href={action.href}
-                  download={action.download}
+                  download={"download" in action ? action.download : undefined}
                   target={action.href.startsWith("http") ? "_blank" : undefined}
                   rel={action.href.startsWith("http") ? "noreferrer" : undefined}
                   className="availability-action"

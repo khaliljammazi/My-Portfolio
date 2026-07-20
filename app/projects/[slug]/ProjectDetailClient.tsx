@@ -1,7 +1,7 @@
 "use client";
 
 import type { Project } from "@/data/projects";
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants } from "motion/react";
 import {
   ArrowLeft,
   Calendar,
@@ -32,6 +32,11 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
     project.solution ? { title: "Approach", content: project.solution } : null,
     project.impact ? { title: "Impact", content: project.impact } : null,
   ].filter(Boolean) as { title: string; content: string }[];
+
+  const splitMetric = (metric: string) => {
+    const match = metric.match(/^([+.\d][\d+.,%KMkmx-]*)\s+(.+)$/);
+    return match ? { value: match[1], label: match[2] } : null;
+  };
 
   return (
     <main className="min-h-screen">
@@ -99,11 +104,25 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
             viewport={{ once: true }}
             className="project-detail-metrics"
           >
-            {project.metrics.map((metric) => (
-              <div key={metric} className="project-detail-metric-card">
-                <span>{metric}</span>
-              </div>
-            ))}
+            {project.metrics.map((metric) => {
+              const split = splitMetric(metric);
+              return (
+                <div key={metric} className="project-detail-metric-card">
+                  {split ? (
+                    <span className="flex flex-col items-center gap-1">
+                      <span className="bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-2xl font-extrabold tracking-tight text-transparent md:text-3xl">
+                        {split.value}
+                      </span>
+                      <span className="text-xs font-medium text-[hsl(var(--muted-foreground))] md:text-sm">
+                        {split.label}
+                      </span>
+                    </span>
+                  ) : (
+                    <span>{metric}</span>
+                  )}
+                </div>
+              );
+            })}
           </motion.div>
         )}
 
@@ -125,9 +144,17 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
                 transition={{ delay: 0.04 }}
                 className="project-insight-grid"
               >
-                {insightBlocks.map((block) => (
+                {insightBlocks.map((block, index) => (
                   <article key={block.title} className="project-insight-card">
-                    <p className="project-insight-title">{block.title}</p>
+                    <div className="mb-3 flex items-center justify-between gap-2">
+                      <p className="project-insight-title">{block.title}</p>
+                      <span
+                        aria-hidden="true"
+                        className="text-sm font-extrabold tabular-nums text-[var(--secondary-text)]/60"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
                     <p>{block.content}</p>
                   </article>
                 ))}

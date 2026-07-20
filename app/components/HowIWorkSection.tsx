@@ -1,7 +1,7 @@
 "use client";
 
 import { credibilityHighlights, profile, skillGroups, workingStyle } from "@/data/profile";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export function HowIWorkSection() {
   return (
@@ -18,7 +18,7 @@ export function HowIWorkSection() {
             <div className="portfolio-section-heading left">
               <span>How I work</span>
               <h2>Intentional systems, clear collaboration, solid delivery</h2>
-              <p>I like product work that balances speed, structure, and craft. That usually means aligning UI quality with business outcomes from the start.</p>
+              <p>Speed, structure, and craft — with UI quality aligned to business outcomes from day one.</p>
             </div>
 
             <div className="work-style-list">
@@ -32,7 +32,7 @@ export function HowIWorkSection() {
                   className="portfolio-panel"
                 >
                   <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <p className="mt-2 text-sm">{item.description}</p>
                 </motion.article>
               ))}
             </div>
@@ -47,7 +47,7 @@ export function HowIWorkSection() {
           >
             <div className="portfolio-panel">
               <p className="proof-kicker">Currently building</p>
-              <ul className="proof-list">
+              <ul className="proof-list text-sm">
                 {profile.currentFocus.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -56,7 +56,7 @@ export function HowIWorkSection() {
 
             <div className="portfolio-panel">
               <p className="proof-kicker">Why teams trust me</p>
-              <ul className="proof-list">
+              <ul className="proof-list text-sm">
                 {credibilityHighlights.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -74,7 +74,7 @@ export function HowIWorkSection() {
         >
           <span>Core stack</span>
           <h2>Strengths grouped by how I ship</h2>
-          <p>Instead of a logo wall alone, this shows how I think about the stack when building and maintaining products.</p>
+          <p>How I think about the stack when building and maintaining products.</p>
         </motion.div>
 
         <div className="skill-group-grid">

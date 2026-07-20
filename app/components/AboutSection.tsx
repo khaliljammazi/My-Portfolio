@@ -1,7 +1,8 @@
 "use client";
 
 import { profileStats } from "@/data/profile";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
+import { Building2, Code2, Gauge, Layers } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -48,14 +49,26 @@ const techStack = [
   { name: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
 ];
 
-const proofCards = [
+const highlights = [
   {
-    title: "Product-minded engineering",
-    text: "I focus on interfaces that are fast to understand, fast to load, and fast to maintain.",
+    icon: Code2,
+    title: "What I bring",
+    text: "Production-ready interfaces and systems, from clean frontends to dependable integrations.",
   },
   {
-    title: "Enterprise and startup range",
-    text: "I can work inside complex delivery environments without losing attention to UI detail and user flow.",
+    icon: Gauge,
+    title: "What I optimize for",
+    text: "Performance, maintainability, and polish that stays easy to build on.",
+  },
+  {
+    icon: Layers,
+    title: "Product-minded engineering",
+    text: "Interfaces that are fast to understand, fast to load, and fast to maintain.",
+  },
+  {
+    icon: Building2,
+    title: "Enterprise to startup range",
+    text: "Complex delivery environments without losing UI detail or user flow.",
   },
 ];
 
@@ -106,8 +119,8 @@ export function AboutSection() {
           <h2 className="mb-4 bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-3xl font-bold text-transparent sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl">
             About Me
           </h2>
-          <p className="mx-auto max-w-3xl px-4 text-base leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-lg md:text-xl">
-            I&apos;m <span className="font-semibold text-[var(--secondary)]">Khalil Jammazi</span>, a full-stack developer building modern web platforms, immersive interfaces, and scalable digital products with a strong eye for clarity and performance.
+          <p className="mx-auto max-w-2xl px-4 text-base leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-lg">
+            I&apos;m <span className="font-semibold text-[var(--secondary)]">Khalil Jammazi</span> — full-stack developer, building fast, polished products for web, mobile, and data.
           </p>
         </motion.div>
 
@@ -117,38 +130,28 @@ export function AboutSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
           style={{ x: cardsX }}
-          className="mb-12 grid gap-4 md:mb-20 md:grid-cols-2 md:gap-8"
+          className="mb-12 grid gap-4 sm:grid-cols-2 md:mb-16 md:gap-5"
         >
-          <div className="rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-5 transition-colors hover:border-[var(--secondary)] md:rounded-2xl md:p-8">
-            <h3 className="mb-3 text-lg font-bold text-[hsl(var(--foreground))] sm:text-xl md:mb-4 md:text-2xl">What I bring</h3>
-            <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base">
-              I turn product ideas into interfaces and systems that feel intentional, responsive, and production-ready. That includes clean frontends, dependable backend integrations, and thoughtful user flows.
-            </p>
-          </div>
-
-          <div className="rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-5 transition-colors hover:border-[var(--secondary)] md:rounded-2xl md:p-8">
-            <h3 className="mb-3 text-lg font-bold text-[hsl(var(--foreground))] sm:text-xl md:mb-4 md:text-2xl">What I optimize for</h3>
-            <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base">
-              Performance, maintainability, and strong visual polish. I like shipping work that looks sharp, solves a real problem, and stays easy to build on.
-            </p>
-          </div>
+          {highlights.map((card, index) => {
+            const Icon = card.icon;
+            return (
+              <motion.article
+                key={card.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                className="rounded-xl border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-5 transition-colors hover:border-[var(--secondary)] md:rounded-2xl md:p-6"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--secondary)_12%,transparent)] text-[var(--secondary)]">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <h3 className="mb-1.5 text-base font-bold text-[hsl(var(--foreground))] md:text-lg">{card.title}</h3>
+                <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))]">{card.text}</p>
+              </motion.article>
+            );
+          })}
         </motion.div>
-
-        <div className="mb-12 grid gap-4 md:mb-16 md:grid-cols-2">
-          {proofCards.map((card, index) => (
-            <motion.article
-              key={card.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              viewport={{ once: true }}
-              className="rounded-2xl border border-[var(--brand-border)] bg-[linear-gradient(135deg,var(--brand-soft-1),transparent)] p-6"
-            >
-              <h3 className="mb-2 text-lg font-semibold text-[hsl(var(--foreground))]">{card.title}</h3>
-              <p className="text-sm leading-relaxed text-[hsl(var(--muted-foreground))]">{card.text}</p>
-            </motion.article>
-          ))}
-        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -180,7 +183,7 @@ export function AboutSection() {
           className="mb-8 text-center md:mb-12"
         >
           <h3 className="mb-2 text-xl font-bold text-[hsl(var(--foreground))] sm:text-2xl md:text-3xl">Technologies</h3>
-          <p className="text-sm text-[hsl(var(--muted-foreground))] md:text-base">Tools and frameworks I use to ship product work across web, mobile, and data interfaces.</p>
+          <p className="text-sm text-[hsl(var(--muted-foreground))] md:text-base">The tools I ship with, across web, mobile, and data.</p>
         </motion.div>
 
         <div className="relative overflow-hidden py-8 md:py-12">

@@ -1,7 +1,7 @@
 "use client";
 
 import { profile } from "@/data/profile";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, Code2, Download, Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../ui/Button";
@@ -17,8 +17,8 @@ export function Hero() {
     : ["#1e3a8a", "#1d4ed8", "#3b82f6"]; 
 
   const stats = [
-    { label: "Years building products", value: "3+" },
-    { label: "Core specialities", value: "Web · Mobile · Data" },
+    { value: "3+", label: "years building products" },
+    { value: "Web · Mobile · Data", label: "core specialities" },
   ];
 
   return (
@@ -59,10 +59,10 @@ export function Hero() {
         />
 
         <BlurText
-          text="I'm Jammazi Khalil, a full-stack developer creating scalable web platforms, interactive experiences, and enterprise applications with a strong focus on product clarity and performance."
+          text="I'm Khalil Jammazi — a full-stack developer shipping fast, scalable products for web and mobile."
           delay={200}
           animateBy="words"
-          className="max-w-2xl px-2 text-center text-base leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-lg md:text-xl lg:text-2xl"
+          className="max-w-xl px-2 text-center text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base md:text-lg"
         />
 
         <motion.div
@@ -91,17 +91,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-8 flex flex-wrap justify-center gap-6 sm:gap-8 md:mt-12"
+          className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-xs text-[hsl(var(--muted-foreground))] sm:text-sm md:mt-10"
           role="region"
           aria-label="Professional statistics"
         >
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-2xl font-bold text-transparent sm:text-3xl md:text-4xl">
-                {stat.value}
-              </div>
-              <div className="mt-1 text-xs text-[hsl(var(--muted-foreground))] sm:text-sm">{stat.label}</div>
-            </div>
+          {stats.map((stat, index) => (
+            <span key={stat.label} className="flex items-center gap-3">
+              {index > 0 && <span className="h-1 w-1 rounded-full bg-[hsl(var(--border))]" aria-hidden="true" />}
+              <span>
+                <span className="font-semibold text-[hsl(var(--foreground))]">{stat.value}</span> {stat.label}
+              </span>
+            </span>
           ))}
         </motion.div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { profile } from "@/data/profile";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -198,9 +198,9 @@ export default function ContactPage() {
                   const isComplete = currentStep > step.id || isStepComplete(step.id);
 
                   return (
-                    <div key={step.id} className="relative flex flex-col items-center gap-2 bg-[hsl(var(--background))] px-2">
+                    <div key={step.id} className="relative flex min-w-0 flex-col items-center gap-2 bg-[hsl(var(--background))] px-1 sm:px-2">
                       <motion.div
-                        className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all ${
+                        className={`flex h-9 w-9 items-center justify-center rounded-full border-2 transition-all sm:h-10 sm:w-10 ${
                           isActive
                             ? "scale-110 border-transparent bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white"
                             : isComplete
@@ -212,7 +212,7 @@ export default function ContactPage() {
                         {isComplete && !isActive ? <Check className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
                       </motion.div>
                       <span
-                        className={`text-xs font-medium transition-colors ${
+                        className={`text-center text-[10px] font-medium transition-colors sm:text-xs ${
                           isActive || isComplete ? "text-[var(--secondary)]" : "text-[hsl(var(--muted-foreground))]"
                         }`}
                       >
