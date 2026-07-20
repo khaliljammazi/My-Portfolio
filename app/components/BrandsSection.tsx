@@ -5,6 +5,31 @@ import { brands } from "@/data/brands";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+function BrandLogo({ name, logo }: { name: string; logo: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="w-20 h-20 rounded-xl flex items-center justify-center bg-[var(--secondary)]/10 text-[var(--secondary)] text-2xl font-bold">
+        {name.charAt(0)}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-20 h-20 rounded-xl overflow-hidden flex items-center justify-center bg-white/5 p-2">
+      <Image
+        src={logo}
+        alt={name}
+        width={72}
+        height={72}
+        className="w-full h-full object-contain"
+        unoptimized
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+}
 
 export function BrandsSection() {
   const [paused, setPaused] = useState(false);
@@ -65,16 +90,7 @@ className="flex gap-5 w-max"
                            hover:-translate-y-1.5
                            transition-all duration-300"
               >
-                <div className="w-20 h-20 rounded-xl overflow-hidden flex items-center justify-center bg-white/5 p-2">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    width={72}
-                    height={72}
-                    className="w-full h-full object-contain"
-                    unoptimized
-                  />
-                </div>
+                <BrandLogo name={brand.name} logo={brand.logo} />
                 <span className="text-sm font-semibold text-center text-[hsl(var(--foreground))] leading-tight px-3 line-clamp-2">
                   {brand.name}
                 </span>
