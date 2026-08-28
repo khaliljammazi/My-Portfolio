@@ -122,6 +122,8 @@
 .project-cover-image { position: relative; display: block; height: 54%; overflow: hidden; }
 .project-cover-image img { transition: transform .7s var(--expo-out); }
 .project-cover-card:hover .project-cover-image img { transform: scale(1.05); }
+.project-visual { width: 100%; overflow: hidden; background: #07111f; }
+.project-visual svg { display: block; width: 100%; height: 100%; object-fit: cover; }
 .project-cover-shade { position: absolute; inset: 0; background: linear-gradient(to top, hsl(var(--card)) 0%, transparent 45%); }
 .project-year { position: absolute; top: 1rem; right: 1rem; padding: .4rem .7rem; border: 1px solid rgb(255 255 255 / .25); border-radius: 999px; background: rgb(0 0 0 / .35); color: white; font-size: .75rem; backdrop-filter: blur(10px); }
 .project-cover-content { display: flex; height: 46%; flex-direction: column; gap: .65rem; padding: clamp(1rem, 3vw, 1.6rem); }

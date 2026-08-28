@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Clock, CheckCircle2, ChevronRight } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { ProjectVisual } from "../../components/ProjectVisual";
 
 type Props = { project: Project; nextProject: Project };
 
@@ -22,14 +23,18 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="relative h-[55vh] md:h-[70vh] overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          sizes="100vw"
-          className="object-cover"
-          priority
-        />
+        {project.visual ? (
+          <ProjectVisual type={project.visual} title={project.title} className="absolute inset-0 h-full" />
+        ) : (
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="100vw"
+            className="object-cover"
+            priority
+          />
+        )}
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))] via-black/40 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
@@ -279,13 +284,17 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
           >
             <div className="flex items-center gap-5">
               <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0">
-                <Image
-                  src={nextProject.image}
-                  alt={nextProject.title}
-                  fill
-                  sizes="(min-width: 768px) 80px, 64px"
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
+                {nextProject.visual ? (
+                  <ProjectVisual type={nextProject.visual} title={nextProject.title} className="h-full group-hover:scale-110 transition-transform duration-500" />
+                ) : (
+                  <Image
+                    src={nextProject.image}
+                    alt={nextProject.title}
+                    fill
+                    sizes="(min-width: 768px) 80px, 64px"
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                )}
               </div>
               <div>
                 <p className="font-bold text-lg md:text-xl text-[hsl(var(--foreground))] group-hover:text-[var(--secondary)] transition-colors">

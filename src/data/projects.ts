@@ -10,6 +10,7 @@ export type Project = {
   liveUrl?: string;
   githubUrl?: string;
   featured?: boolean;
+  visual?: ProjectVisualType;
   // Detail page fields
   role?: string;
   duration?: string;
@@ -17,30 +18,33 @@ export type Project = {
   overview?: string;
 };
 
+export type ProjectVisualType = "portal" | "microfrontends" | "banking" | "analytics";
+
 export const projects: Project[] = [
   {
     slug: "maroc-telecom-rebranding-2025",
     title: "Maroc Telecom Rebranding 2025",
-    shortDescription: "Dashboard analytics temps réel – +340 % perf",
+    shortDescription: "High-traffic telecom portal with a 340% Lighthouse performance improvement",
     description:
       "Rebuilding the Maroc Telecom digital presence with a fresh, modern design that reflects their brand evolution. The project involved creating a responsive website with enhanced user experience, integrating new branding elements, and ensuring consistency across all digital touchpoints.",
     overview:
-      "Led the full frontend rebuild of iam.ma — one of Morocco's largest telecom websites with 30M+ monthly visitors. The project required migrating a legacy portal to a modern Liferay DXP + React architecture while maintaining zero downtime and preserving SEO rankings.",
+      "Contributed to the redesign of iam.ma, a high-traffic telecom portal serving 30M+ monthly visitors. Built responsive React components and Liferay templates while coordinating REST API integrations with CMS and backend teams.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
     tags: ["Liferay", "React", "JSP", "Java"],
     year: "2025",
     role: "Lead Frontend Developer",
-    duration: "6 months",
+    duration: "2022 - 2025",
     highlights: [
-      "+340% performance improvement after migration to React components",
-      "Rebuilt 50+ page templates with fully responsive layouts",
-      "Integrated Liferay DXP CMS for content management at scale",
-      "Coordinated with UX team to roll out new brand identity system",
-      "30M+ monthly visitors with zero downtime during the transition",
+      "Improved Lighthouse performance by 340%",
+      "Integrated 50+ REST APIs across portal experiences",
+      "Built reusable, responsive React components and Liferay templates",
+      "Coordinated data flows with CMS and backend teams",
+      "Supported a portal serving 30M+ monthly visitors",
     ],
     liveUrl: "https://www.iam.ma",
     featured: true,
+    visual: "portal",
   },
   {
     slug: "threejs-3d-landing-page",
@@ -61,7 +65,7 @@ export const projects: Project[] = [
       "Scroll-driven camera animations using GSAP ScrollTrigger",
       "WebGL shaders for realistic metal and glass reflections",
       "95+ Lighthouse performance score on Vercel",
-      "Fully responsive — degrades gracefully on low-end devices",
+      "Fully responsive, with graceful fallback on low-end devices",
     ],
     liveUrl: "https://landing-page-mt.vercel.app",
     featured: true,
@@ -69,7 +73,7 @@ export const projects: Project[] = [
   {
     slug: "e-commerce-platform",
     title: "E-Commerce Platform",
-    shortDescription: "Plateforme e-commerce haute performance – +250 % conversion",
+    shortDescription: "High-performance commerce platform with secure payments and inventory management",
     description:
       "Developed a scalable e-commerce platform using Next.js and Node.js, featuring a seamless shopping experience, secure payment integration, and advanced product management capabilities.",
     overview:
@@ -91,11 +95,11 @@ export const projects: Project[] = [
   {
     slug: "social-media-app",
     title: "Social Media App",
-    shortDescription: "Application sociale innovante – +500K utilisateurs actifs",
+    shortDescription: "Cross-platform social application with realtime messaging and content sharing",
     description:
       "Created a social media application with real-time messaging, user profiles, and content sharing features using React Native and Firebase.",
     overview:
-      "A cross-platform mobile social network built with React Native and a GraphQL + Firebase backend. The app supports real-time chat, a content feed, user discovery, and push notifications — scaled to handle 500K+ active users.",
+      "A cross-platform mobile social network built with React Native and a GraphQL + Firebase backend. The app supports real-time chat, a content feed, user discovery, and push notifications.",
     image:
       "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop&q=80",
     tags: ["React Native", "Firebase", "GraphQL", "Expo"],
@@ -133,68 +137,66 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    slug: "orange-dynamic-bff",
-    title: "Orange - Dynamic BFF",
-    shortDescription: "Backend For Frontend architecture for Orange telecom",
+    slug: "atib-bank-liferay-redesign",
+    title: "ATIB Bank Portal Redesign",
+    shortDescription: "Banking portal integration with Liferay and a Spring Boot synchronization service",
     description:
-      "Designed and implemented a dynamic Backend For Frontend (BFF) layer for Orange's digital ecosystem, optimizing API responses for various client applications.",
+      "Led the technical implementation of the ATIB.LY redesign, combining Liferay portal extensions with a Spring Boot integration service for third-party financial data.",
     overview:
-      "A scalable BFF architecture that serves as an intelligent middleware between Orange's microservices and frontend applications. Handles request aggregation, response transformation, and client-specific optimizations.",
+      "Served as the lead technical contact for the banking portal redesign, coordinating with stakeholders and business analysts. Built the synchronization microservice and delivered Liferay extensions, themes, and Content Security Policy configuration.",
     image:
       "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&q=80",
-    tags: ["Node.js", "GraphQL", "Redis", "Docker"],
-    year: "2023",
-    role: "Backend Developer",
-    duration: "6 months",
+    tags: ["Java", "Spring Boot", "Liferay DXP", "REST APIs"],
+    year: "2026",
+    role: "Java / Liferay Developer",
     highlights: [
-      "Reduced API response times by 40% through intelligent caching",
-      "Built GraphQL layer aggregating 15+ microservices",
-      "Implemented client-specific response transformations",
-      "Served 2M+ daily active users across mobile and web platforms",
+      "Acted as the lead technical contact for the ATIB.LY redesign",
+      "Built a Spring Boot service to synchronize third-party financial data",
+      "Delivered Liferay extensions and portal themes",
+      "Configured Content Security Policy requirements",
     ],
-    liveUrl: "https://www.orange.com",
+    visual: "banking",
   },
   {
     slug: "orange-max-it",
-    title: "Orange - Max it",
-    shortDescription: "Super app mobile experience for Orange customers",
+    title: "Maxit Orange Control Tower",
+    shortDescription: "Modular Nuxt.js back office designed for independent team releases",
     description:
-      "Max it is Orange's flagship super app, providing customers with a unified mobile experience for managing services, payments, and digital content.",
+      "Built a responsive back-office platform for the Maxit Orange Control Tower using Nuxt.js and Vue.js, with clearly defined business and integration boundaries.",
     overview:
-      "Contributed to the development of Orange's super app that consolidates multiple services into a single mobile experience. Features include bill payments, service management, entertainment, and loyalty rewards.",
+      "The platform uses Domain-Driven Design and a micro-frontend architecture so multiple teams can develop and release modules independently while preserving a coherent operator experience.",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&q=80",
-    tags: ["React Native", "TypeScript", "Redux", "Firebase"],
-    year: "2023",
-    role: "Mobile Developer",
-    duration: "10 months",
+    tags: ["Nuxt.js", "Vue.js", "TypeScript", "Micro-frontends"],
+    year: "2025",
+    role: "Front-End Developer",
     highlights: [
-      "Developed core payment module handling 1M+ monthly transactions",
-      "Implemented push notification system with 95% delivery rate",
-      "Built offline-first architecture for low connectivity regions",
-      "Achieved 4.5+ star rating on App Store and Play Store",
+      "Built a responsive back-office platform with Nuxt.js and Vue.js",
+      "Applied Domain-Driven Design to organize business capabilities",
+      "Defined integration boundaries with business analysts",
+      "Designed a micro-frontend architecture for modular releases",
     ],
+    visual: "microfrontends",
   },
   {
-    slug: "royal-air-maroc-ram",
-    title: "Royal Air Maroc - RAM",
-    shortDescription: "Analytics dashboard with custom visualizations",
+    slug: "embedded-bi-dashboard",
+    title: "Embedded BI Dashboard",
+    shortDescription: "Responsive KPI monitoring embedded through the Qlik Sense Mashup API",
     description:
-      "Led the development of custom responsive dashboards for Royal Air Maroc using Qlik Sense, featuring advanced D3.js visualizations and export capabilities.",
+      "Integrated Qlik Sense visualizations into a responsive web interface to make business KPIs easier to monitor and explore.",
     overview:
-      "A comprehensive business intelligence solution for Royal Air Maroc featuring real-time analytics, custom chart extensions, and multi-format export capabilities. The project involved leading a team and ensuring delivery quality.",
+      "An embedded analytics experience built with the Qlik Sense Mashup API. Responsive layouts and interactive filters help business users move from headline indicators to detailed analysis without leaving the application.",
     image:
       "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop&q=80",
-    tags: ["Qlik Sense", "D3.js", "JavaScript", "Bootstrap"],
-    year: "2022",
-    role: "Team Lead & Developer",
-    duration: "5 months",
+    tags: ["Qlik Sense", "Mashup API", "JavaScript", "Responsive UI"],
+    year: "2022 - 2025",
+    role: "Front-End Developer - BI Dashboard",
     highlights: [
-      "Led a team of 3 developers ensuring quality deliverables",
-      "Developed custom responsive dashboards and chart extensions",
-      "Built D3.js visualizations for complex data representation",
-      "Created export functionality for PDF, PNG, DOC, and XLS formats",
+      "Embedded Qlik Sense visualizations through the Mashup API",
+      "Designed responsive dashboard layouts",
+      "Added interactive filters for business analysis",
+      "Simplified KPI monitoring inside the web application",
     ],
-    liveUrl: "https://www.royalairmaroc.com",
+    visual: "analytics",
   },
 ];

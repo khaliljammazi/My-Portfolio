@@ -6,10 +6,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Jammazi Khalil - Full-Stack Developer specializing in React, Next.js, Vue.js. View my portfolio, projects, and get in touch for freelance work.",
+  description: "Mohamed Khalil Jammazi is a front-end and full-stack developer building high-traffic telecom portals, banking integrations, micro-frontends, and enterprise applications.",
   openGraph: {
-    title: "Jammazi Khalil | Full-Stack Developer Portfolio",
-    description: "Explore my portfolio showcasing modern web applications built with React, Next.js, Vue.js, and TypeScript.",
+    title: "Mohamed Khalil Jammazi | Enterprise Front-End & Full-Stack Developer",
+    description: "Case studies across telecom, banking, retail, embedded analytics, and scalable web platforms.",
   },
 };
 

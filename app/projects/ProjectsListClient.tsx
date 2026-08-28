@@ -6,6 +6,7 @@ import { projects } from "@/data/projects";
 import { Search, Filter, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectVisual } from "../components/ProjectVisual";
 
 export default function ProjectsListClient() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -172,13 +173,17 @@ export default function ProjectsListClient() {
                 <article className="group relative bg-[hsl(var(--card))] rounded-2xl overflow-hidden border border-[hsl(var(--border))] hover:border-[var(--secondary)] transition-all duration-300 hover:shadow-xl hover:shadow-[var(--secondary)]/10 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                    {project.visual ? (
+                      <ProjectVisual type={project.visual} title={project.title} className="h-full transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
                     {/* Featured Badge */}

@@ -27,10 +27,10 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 }
 
 const portfolioStats = [
-  { label: "Years Experience", value: 3, suffix: "+" },
-  { label: "Projects Delivered", value: 20, suffix: "+" },
-  { label: "Technologies", value: 15, suffix: "" },
-  { label: "Happy Clients", value: 10, suffix: "+" },
+  { label: "Years Experience", value: 4, suffix: "+" },
+  { label: "Monthly Portal Visitors", value: 30, suffix: "M+" },
+  { label: "REST APIs Integrated", value: 50, suffix: "+" },
+  { label: "Professional Languages", value: 3, suffix: "" },
 ];
 
 const techStack = [
@@ -109,9 +109,9 @@ export function AboutSection() {
             About Me
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto leading-relaxed px-4">
-            I'm <span className="text-[var(--secondary)] font-semibold">Khalil Jammazi</span>,
-            a passionate software developer specializing in building modern web applications. 
-            I love turning complex problems into simple, beautiful, and intuitive solutions.
+            I&apos;m <span className="text-[var(--secondary)] font-semibold">Mohamed Khalil Jammazi</span>,
+            a front-end and full-stack developer building high-traffic portals, micro-frontends,
+            back-office tools, and API-driven applications for international teams.
           </p>
         </motion.div>
 
@@ -127,17 +127,18 @@ export function AboutSection() {
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">What I Do</h3>
             <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
-              I design and develop full-stack web applications with a focus on user experience, 
-              performance, and scalability. From responsive frontends to robust backends, 
-              I bring ideas to life with clean, maintainable code.
+              I turn complex telecom, banking, retail, and analytics requirements into responsive
+              interfaces and reliable integrations. My work spans customer portals, enterprise
+              back offices, embedded BI dashboards, and AI-assisted support platforms.
             </p>
           </div>
 
           <div className="bg-[hsl(var(--card))] border border-[hsl(var(--border))] rounded-xl md:rounded-2xl p-5 md:p-8 hover:border-[var(--secondary)] transition-colors">
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 md:mb-4 text-[hsl(var(--foreground))]">Tech Stack</h3>
             <p className="text-sm sm:text-base text-[hsl(var(--muted-foreground))] leading-relaxed">
-              I work with modern technologies including React, Next.js, TypeScript, Node.js, 
-              and various databases. I'm always learning and adapting to new tools and frameworks.
+              I work across Angular, React, Vue.js, Nuxt.js, TypeScript, Java, Spring Boot,
+              Liferay DXP, REST APIs, and Qlik Sense, with practical experience in
+              micro-frontends, CI/CD, data platforms, and AI/RAG systems.
             </p>
           </div>
         </motion.div>
@@ -234,7 +235,7 @@ export function AboutSection() {
             href="/contact"
             className="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 text-base md:text-lg font-semibold rounded-full bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] text-white hover:scale-105 transition-transform shadow-lg"
           >
-            Let's Work Together
+            Let&apos;s Work Together
           </a>
         </motion.div>
       </div>

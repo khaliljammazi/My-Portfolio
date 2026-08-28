@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { projects } from "@/data/projects";
+import { ProjectVisual } from "../components/ProjectVisual";
 import { useMemo, useState } from "react";
 
 const carouselId = "projects-cover-flow";
@@ -81,13 +82,17 @@ export default function Projects() {
             <div className="project-cover-slide">
               <article className="project-cover-card">
                 <Link href={`/projects/${project.slug}`} className="project-cover-image" tabIndex={-1} aria-hidden="true">
-                  <Image
-                    src={project.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 82vw, (max-width: 1024px) 60vw, 520px"
-                    className="object-cover"
-                  />
+                  {project.visual ? (
+                    <ProjectVisual type={project.visual} title={project.title} className="h-full" />
+                  ) : (
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 82vw, (max-width: 1024px) 60vw, 520px"
+                      className="object-cover"
+                    />
+                  )}
                   <div className="project-cover-shade" />
                   <span className="project-year">{project.year}</span>
                 </Link>

@@ -24,12 +24,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://khalil-jammazi.vercel.app'),
   title: {
-    default: "Jammazi Khalil | Full-Stack Developer & Software Engineer",
-    template: "%s | Jammazi Khalil"
+    default: "Mohamed Khalil Jammazi | Front-End & Full-Stack Developer",
+    template: "%s | Mohamed Khalil Jammazi"
   },
-  description: "Passionate full-stack developer specializing in React, Next.js, Vue.js, and modern web technologies. Building scalable applications with clean, maintainable code. Available for freelance work.",
+  description: "Front-end and full-stack developer with 4+ years of experience building high-traffic telecom portals, micro-frontends, banking integrations, and enterprise applications.",
   keywords: [
-    "Jammazi Khalil",
+    "Mohamed Khalil Jammazi",
     "Full-Stack Developer",
     "Software Engineer",
     "React Developer",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
     "Freelance Developer",
     "Portfolio"
   ],
-  authors: [{ name: "Jammazi Khalil" }],
-  creator: "Jammazi Khalil",
-  publisher: "Jammazi Khalil",
+  authors: [{ name: "Mohamed Khalil Jammazi" }],
+  creator: "Mohamed Khalil Jammazi",
+  publisher: "Mohamed Khalil Jammazi",
   robots: {
     index: true,
     follow: true,
@@ -64,22 +64,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://khalil-jammazi.vercel.app",
-    title: "Jammazi Khalil | Full-Stack Developer & Software Engineer",
-    description: "Passionate full-stack developer specializing in React, Next.js, Vue.js, and modern web technologies. Building scalable applications with clean, maintainable code.",
-    siteName: "Jammazi Khalil Portfolio",
+    title: "Mohamed Khalil Jammazi | Front-End & Full-Stack Developer",
+    description: "Enterprise web case studies across telecom, banking, retail, analytics, and scalable platform engineering.",
+    siteName: "Mohamed Khalil Jammazi Portfolio",
     images: [
       {
         url: "/img/avatar.jpg",
         width: 1200,
         height: 630,
-        alt: "Jammazi Khalil - Full-Stack Developer",
+        alt: "Mohamed Khalil Jammazi - Front-End and Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jammazi Khalil | Full-Stack Developer & Software Engineer",
-    description: "Passionate full-stack developer specializing in React, Next.js, Vue.js, and modern web technologies.",
+    title: "Mohamed Khalil Jammazi | Front-End & Full-Stack Developer",
+    description: "Enterprise web development across telecom, banking, retail, analytics, and AI-assisted platforms.",
     images: ["/img/avatar.jpg"],
     creator: "@jammazikhalil",
   },
@@ -110,7 +110,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              "name": "Jammazi Khalil",
+              "name": "Mohamed Khalil Jammazi",
               "url": "https://khalil-jammazi.vercel.app",
               "image": "https://khalil-jammazi.vercel.app/img/avatar.jpg",
               "sameAs": [
@@ -123,7 +123,7 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "Freelance"
               },
-              "description": "Passionate full-stack developer specializing in React, Next.js, Vue.js, and modern web technologies.",
+              "description": "Front-end and full-stack developer building high-traffic portals, micro-frontends, banking integrations, and enterprise applications.",
               "knowsAbout": [
                 "React", "Next.js", "Vue.js", "TypeScript", "JavaScript", "Node.js", "MongoDB", "PostgreSQL"
               ]

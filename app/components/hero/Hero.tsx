@@ -16,8 +16,8 @@ export function Hero() {
     : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
 
   const stats = [
-    { label: "Years building products", value: "3+" },
-    { label: "Core specialities", value: "Web · Mobile · Data" }
+    { label: "Years building enterprise products", value: "4+" },
+    { label: "Monthly visitors on largest portal", value: "30M+" }
   ];
 
   return (
@@ -46,10 +46,10 @@ export function Hero() {
             <span className="text-xs md:text-sm font-medium text-[hsl(var(--foreground))]">Available for freelance work</span>
           </motion.div>
 
-          <h1 className="sr-only">Jammazi Khalil — Full-Stack Developer building scalable digital products</h1>
+          <h1 className="sr-only">Mohamed Khalil Jammazi - Front-End and Full-Stack Developer for enterprise digital platforms</h1>
           
           <BlurText
-            text="I build digital products that perform."
+            text="I build scalable platforms for telecom, banking, and enterprise teams."
             delay={150}
             animateBy="words"
             direction="bottom"
@@ -57,7 +57,7 @@ export function Hero() {
           />
           
           <BlurText
-            text="I'm Jammazi Khalil, a full-stack developer creating scalable web platforms, interactive experiences, and enterprise applications."
+            text="I'm Mohamed Khalil Jammazi, a front-end and full-stack developer specializing in high-traffic portals, micro-frontends, back-office applications, and API integrations."
             delay={200}
             animateBy="words"
             className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl text-center leading-relaxed px-2"
