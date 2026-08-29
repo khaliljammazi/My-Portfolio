@@ -110,7 +110,7 @@ export default function ContactPage() {
             <span className="contact-quick-icon">{emailCopied ? <Check /> : <Copy />}</span>
             <span><strong>{emailCopied ? "Email copied" : "Copy my email"}</strong><small>{contactEmail}</small></span>
           </button>
-          <a href="https://www.linkedin.com/in/jammazi-mohamed-khalil-440a83119/" target="_blank" rel="noreferrer" className="contact-quick-link">
+          <a href="https://www.linkedin.com/in/khalil-jammazi/" target="_blank" rel="noreferrer" className="contact-quick-link">
             <span className="contact-quick-icon"><Linkedin /></span>
             <span><strong>LinkedIn</strong><small>Professional profile</small></span>
           </a>
