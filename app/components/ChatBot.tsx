@@ -21,7 +21,7 @@ function getSmartResponse(message: string): string {
   if (/\b(contact|hire|freelance|together|reach|available|work with)\b/.test(m))
     return "Khalil is open to freelance work! Head to the Contact page or email khalil.jammazi366@gmail.com directly.";
   if (/\b(experience|year|background|about)\b/.test(m))
-    return "Khalil has 3+ years building modern web applications — from responsive frontends to scalable backends. Based in Tunisia, working with clients globally.";
+    return "Khalil has 4+ years building modern web applications — from responsive frontends to scalable backends. Based in Tunisia, working with clients globally.";
   if (/\b(resume|cv|download)\b/.test(m))
     return "Click the Resume button in the navigation bar at the top of the page to download it!";
   if (/\b(price|cost|rate|budget|charge|fee)\b/.test(m))

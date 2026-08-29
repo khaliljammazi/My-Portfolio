@@ -16,7 +16,7 @@ export function Hero() {
     : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
 
   const stats = [
-    { label: "Years building products", value: "3+" },
+    { label: "Years building products", value: "4+" },
     { label: "Core specialities", value: "Web · Data" }
   ];
 
