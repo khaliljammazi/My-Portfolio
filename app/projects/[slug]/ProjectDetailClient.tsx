@@ -31,7 +31,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
             alt={project.title}
             fill
             sizes="100vw"
-            className="object-cover"
+            className={project.imageFit === "contain" ? "object-contain bg-white" : "object-cover"}
             priority
           />
         )}
@@ -292,7 +292,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
                     alt={nextProject.title}
                     fill
                     sizes="(min-width: 768px) 80px, 64px"
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    className={`${nextProject.imageFit === "contain" ? "object-contain bg-white" : "object-cover"} group-hover:scale-110 transition-transform duration-500`}
                   />
                 )}
               </div>

@@ -5,6 +5,7 @@ export type Project = {
   description: string;
   shortDescription: string;
   image: string;
+  imageFit?: "cover" | "contain";
   tags: string[];
   year: string;
   liveUrl?: string;
@@ -26,25 +27,24 @@ export const projects: Project[] = [
     title: "Maroc Telecom Rebranding 2025",
     shortDescription: "High-traffic telecom portal with a 340% Lighthouse performance improvement",
     description:
-      "Rebuilding the Maroc Telecom digital presence with a fresh, modern design that reflects their brand evolution. The project involved creating a responsive website with enhanced user experience, integrating new branding elements, and ensuring consistency across all digital touchpoints.",
+      "Worked full stack on the Maroc Telecom digital redesign, delivering responsive customer experiences, Liferay components, Java integrations, and REST API connections across the high-traffic portal.",
     overview:
-      "Contributed to the redesign of iam.ma, a high-traffic telecom portal serving 30M+ monthly visitors. Built responsive React components and Liferay templates while coordinating REST API integrations with CMS and backend teams.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
+      "Contributed as a full-stack developer to the redesign of iam.ma, a portal serving 30M+ monthly visitors. The work covered React interfaces, Liferay DXP templates and extensions, Java/JSP development, and integration of more than 50 REST APIs with CMS and backend services.",
+    image: "/projects/maroc-telecom-homepage.png",
+    imageFit: "contain",
     tags: ["Liferay", "React", "JSP", "Java"],
     year: "2025",
-    role: "Lead Frontend Developer",
+    role: "Full-Stack Developer",
     duration: "2022 - 2025",
     highlights: [
       "Improved Lighthouse performance by 340%",
       "Integrated 50+ REST APIs across portal experiences",
-      "Built reusable, responsive React components and Liferay templates",
-      "Coordinated data flows with CMS and backend teams",
+      "Built reusable React components, Liferay templates, and Java/JSP integrations",
+      "Connected frontend experiences with CMS, backend services, and REST APIs",
       "Supported a portal serving 30M+ monthly visitors",
     ],
     liveUrl: "https://www.iam.ma",
     featured: true,
-    visual: "portal",
   },
   {
     slug: "threejs-3d-landing-page",

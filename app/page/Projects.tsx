@@ -90,7 +90,7 @@ export default function Projects() {
                       alt=""
                       fill
                       sizes="(max-width: 640px) 82vw, (max-width: 1024px) 60vw, 520px"
-                      className="object-cover"
+                      className={project.imageFit === "contain" ? "object-contain bg-white" : "object-cover"}
                     />
                   )}
                   <div className="project-cover-shade" />
