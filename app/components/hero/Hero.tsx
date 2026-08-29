@@ -17,7 +17,7 @@ export function Hero() {
 
   const stats = [
     { label: "Years building products", value: "3+" },
-    { label: "Core specialities", value: "Web · Mobile · Data" }
+    { label: "Core specialities", value: "Web · Data" }
   ];
 
   return (

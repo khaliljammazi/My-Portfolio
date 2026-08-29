@@ -65,7 +65,7 @@ export default function ProjectsListClient() {
           </h1>
           <p className="text-lg text-[hsl(var(--muted-foreground))] max-w-2xl mx-auto">
             Explore my portfolio of web development projects, from enterprise
-            applications to innovative mobile apps.
+            applications to innovative  apps.
           </p>
         </motion.div>
 
