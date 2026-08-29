@@ -46,6 +46,27 @@ export const projects: Project[] = [
     liveUrl: "https://www.iam.ma",
     featured: true,
   },
+    {
+    slug: "atib-bank-liferay-redesign",
+    title: "ATIB Bank Portal Redesign",
+    shortDescription: "Banking portal integration with Liferay and a Spring Boot synchronization service",
+    description:
+      "Led the technical implementation of the ATIB.LY redesign, combining Liferay portal extensions with a Spring Boot integration service for third-party financial data.",
+    overview:
+      "Served as the lead technical contact for the banking portal redesign, coordinating with stakeholders and business analysts. Built the synchronization microservice and delivered Liferay extensions, themes, and Content Security Policy configuration.",
+    image: "/projects/atib-bank-homepage.png",
+    imageFit: "contain",
+    tags: ["Java", "Spring Boot", "Liferay DXP", "REST APIs"],
+    year: "2026",
+    role: "Java / Liferay Developer",
+    highlights: [
+      "Acted as the lead technical contact for the ATIB.LY redesign",
+      "Built a Spring Boot service to synchronize third-party financial data",
+      "Delivered Liferay extensions and portal themes",
+      "Configured Content Security Policy requirements",
+    ],
+    liveUrl: "https://atib.ly/home",
+  },
   {
     slug: "threejs-3d-landing-page",
     title: "Three.js 3D Landing Page",
@@ -70,36 +91,34 @@ export const projects: Project[] = [
     liveUrl: "https://landing-page-mt.vercel.app",
     featured: true,
   },
-  {
-    slug: "e-commerce-platform",
-    title: "E-Commerce Platform",
-    shortDescription: "High-performance commerce platform with secure payments and inventory management",
+    {
+    slug: "orange-max-it",
+    title: "Maxit Orange Control Tower",
+    shortDescription: "Modular Nuxt.js back office designed for independent team releases",
     description:
-      "Developed a scalable e-commerce platform using Next.js and Node.js, featuring a seamless shopping experience, secure payment integration, and advanced product management capabilities.",
+      "Built a responsive back-office platform for the Maxit Orange Control Tower using Nuxt.js and Vue.js, with clearly defined business and integration boundaries.",
     overview:
-      "A full-stack e-commerce solution built from the ground up with a focus on conversion rate optimization, performance, and scalability. Features a clean storefront, real-time inventory, Stripe checkout, and a powerful admin dashboard.",
-    image:
-      "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop&q=80",
-    tags: ["Next.js", "Node.js", "MongoDB", "Stripe"],
-    year: "2023",
-    role: "Full-Stack Developer",
-    duration: "3 months",
+      "The platform uses Domain-Driven Design and a micro-frontend architecture so multiple teams can develop and release modules independently while preserving a coherent operator experience.",
+    image: "/projects/maxit-orange-control-tower.jpg",
+    imageFit: "contain",
+    tags: ["Nuxt.js", "Vue.js", "TypeScript", "Micro-frontends"],
+    year: "2025",
+    role: "Front-End Developer",
     highlights: [
-      "+250% conversion rate increase vs. the legacy platform",
-      "Secure Stripe payment integration with webhook event handling",
-      "Real-time inventory management and low-stock alerts",
-      "Admin dashboard with sales analytics and order management",
-      "SSG + ISR for sub-second page loads on product listings",
+      "Built a responsive back-office platform with Nuxt.js and Vue.js",
+      "Applied Domain-Driven Design to organize business capabilities",
+      "Defined integration boundaries with business analysts",
+      "Designed a micro-frontend architecture for modular releases",
     ],
   },
-  {
+    {
     slug: "wafacash-transfer-money",
     title: "Wafacash Transfer Money",
     shortDescription: "Full-stack money-transfer experience connecting CMI and Maroc Telecom services",
     description:
       "Developed Wafacash's digital money-transfer experience, integrating CMI and Maroc Telecom APIs with custom Liferay workflows, themes, and extensions.",
     overview:
-      "Built full-stack capabilities for Wafacash's online money-transfer journey. The work connected CMI payment services and Maroc Telecom APIs, implemented transfer workflows in Liferay, and delivered custom themes and extensions for a consistent, maintainable customer experience.",
+      "Built full-stack capabilities for Wafacash's online money-transfer journey. The work connected CMI payment services, implemented transfer workflows in Liferay, and delivered custom themes and extensions for a consistent, maintainable customer experience.",
     image: "/projects/wafacash-transfer-money.png",
     imageFit: "contain",
     tags: ["Liferay DXP", "Java", "REST APIs", "CMI"],
@@ -113,7 +132,7 @@ export const projects: Project[] = [
       "Delivered responsive desktop and mobile transfer experiences",
     ],
   },
-  {
+   {
     slug: "omniflow",
     title: "Omniflow CX - Maxit Orange",
     shortDescription: "All-in-one digital platform supporting Maxit Orange's move toward the Super App model",
@@ -135,48 +154,7 @@ export const projects: Project[] = [
     liveUrl: "https://omniflow.cx/",
     featured: true,
   },
-  {
-    slug: "atib-bank-liferay-redesign",
-    title: "ATIB Bank Portal Redesign",
-    shortDescription: "Banking portal integration with Liferay and a Spring Boot synchronization service",
-    description:
-      "Led the technical implementation of the ATIB.LY redesign, combining Liferay portal extensions with a Spring Boot integration service for third-party financial data.",
-    overview:
-      "Served as the lead technical contact for the banking portal redesign, coordinating with stakeholders and business analysts. Built the synchronization microservice and delivered Liferay extensions, themes, and Content Security Policy configuration.",
-    image: "/projects/atib-bank-homepage.png",
-    imageFit: "contain",
-    tags: ["Java", "Spring Boot", "Liferay DXP", "REST APIs"],
-    year: "2026",
-    role: "Java / Liferay Developer",
-    highlights: [
-      "Acted as the lead technical contact for the ATIB.LY redesign",
-      "Built a Spring Boot service to synchronize third-party financial data",
-      "Delivered Liferay extensions and portal themes",
-      "Configured Content Security Policy requirements",
-    ],
-    liveUrl: "https://atib.ly/home",
-  },
-  {
-    slug: "orange-max-it",
-    title: "Maxit Orange Control Tower",
-    shortDescription: "Modular Nuxt.js back office designed for independent team releases",
-    description:
-      "Built a responsive back-office platform for the Maxit Orange Control Tower using Nuxt.js and Vue.js, with clearly defined business and integration boundaries.",
-    overview:
-      "The platform uses Domain-Driven Design and a micro-frontend architecture so multiple teams can develop and release modules independently while preserving a coherent operator experience.",
-    image: "/projects/maxit-orange-control-tower.jpg",
-    imageFit: "contain",
-    tags: ["Nuxt.js", "Vue.js", "TypeScript", "Micro-frontends"],
-    year: "2025",
-    role: "Front-End Developer",
-    highlights: [
-      "Built a responsive back-office platform with Nuxt.js and Vue.js",
-      "Applied Domain-Driven Design to organize business capabilities",
-      "Defined integration boundaries with business analysts",
-      "Designed a micro-frontend architecture for modular releases",
-    ],
-  },
-  {
+    {
     slug: "embedded-bi-dashboard",
     title: "Embedded BI Dashboard",
     shortDescription: "Royal Air Maroc analytics and KPI monitoring embedded through the Qlik Sense Mashup API",
@@ -196,4 +174,26 @@ export const projects: Project[] = [
       "Simplified KPI monitoring inside the web application",
     ],
   },
+  {
+    slug: "e-commerce-platform",
+    title: "E-Commerce Platform",
+    shortDescription: "High-performance commerce platform with secure payments and inventory management",
+    description:
+      "Developed a scalable e-commerce platform using Next.js and Node.js, featuring a seamless shopping experience, secure payment integration, and advanced product management capabilities.",
+    overview:
+      "A full-stack e-commerce solution built from the ground up with a focus on conversion rate optimization, performance, and scalability. Features a clean storefront, real-time inventory, Stripe checkout, and a powerful admin dashboard.",
+    image:
+      "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop&q=80",
+    tags: ["Next.js", "Node.js", "MongoDB", "Stripe"],
+    year: "2023",
+    role: "Full-Stack Developer",
+    duration: "3 months",
+    highlights: [
+      "+250% conversion rate increase vs. the legacy platform",
+      "Secure Stripe payment integration with webhook event handling",
+      "Real-time inventory management and low-stock alerts",
+      "Admin dashboard with sales analytics and order management",
+      "SSG + ISR for sub-second page loads on product listings",
+    ],
+  }
 ];

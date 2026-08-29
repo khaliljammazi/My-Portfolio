@@ -27,7 +27,7 @@ export function Footer() {
     { label: "Work", href: "/#projects" },
     { label: "About", href: "/#about" },
     { label: "Contact", href: "/contact" },
-    { label: "Resume", href: "/resume.pdf" },
+    { label: "Resume", href: "/resume" },
   ];
 
   return (
