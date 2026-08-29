@@ -54,8 +54,8 @@ export const projects: Project[] = [
       "Developed an interactive 3D landing page using Three.js to showcase the features of the iPhone 17 Pro Max. The page includes smooth animations, responsive design, and engaging user interactions to enhance the overall user experience.",
     overview:
       "A visually immersive product showcase built entirely in Three.js and vanilla JavaScript. The 3D iPhone model responds to scroll events, camera transitions highlight each product feature, and WebGL shaders create realistic glass and metal materials.",
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&h=600&fit=crop&q=80",
+    image: "/projects/threejs-iphone-17-landing.png",
+    imageFit: "contain",
     tags: ["Three.js", "JavaScript", "WebGL", "GSAP"],
     year: "2024",
     role: "Frontend & 3D Developer",
@@ -116,24 +116,24 @@ export const projects: Project[] = [
   },
   {
     slug: "omniflow",
-    title: "Omniflow",
-    shortDescription: "Enterprise workflow automation platform",
+    title: "Omniflow CX - Maxit Orange",
+    shortDescription: "All-in-one digital platform supporting Maxit Orange's move toward the Super App model",
     description:
-      "Omniflow is an enterprise-grade workflow automation platform that streamlines business processes through intelligent task management and seamless integrations.",
+      "Omniflow CX is Keyrus's all-in-one digital platform and a gateway to the Super App model. I contributed to its implementation for Maxit Orange, helping deliver the responsive Control Tower experience used to operate the ecosystem.",
     overview:
-      "A comprehensive workflow automation solution built to handle complex enterprise processes. Features drag-and-drop workflow builder, real-time collaboration, and extensive third-party integrations.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
-    tags: ["Vue.js", "Node.js", "PostgreSQL", "Redis"],
-    year: "2024",
-    role: "Full-Stack Developer",
-    duration: "8 months",
+      "The Omniflow CX platform brings marketplace services, subscriptions, digital content, contextual recommendations, and partner capabilities into a unified ecosystem. For Maxit Orange, I worked on the Nuxt.js and Vue.js Control Tower back office, defining business integration boundaries and supporting a modular micro-frontend architecture.",
+    image: "/projects/omniflow-cx-homepage.png",
+    imageFit: "contain",
+    tags: ["Nuxt.js", "Vue.js", "TypeScript", "Micro-frontends"],
+    year: "2025",
+    role: "Developer - Maxit Orange Super App",
     highlights: [
-      "Built visual workflow designer with drag-and-drop interface",
-      "Implemented real-time collaboration features using WebSockets",
-      "Integrated with 20+ third-party services (Slack, Jira, etc.)",
-      "Reduced process completion time by 65% for enterprise clients",
+      "Contributed to the Omniflow CX implementation for Maxit Orange",
+      "Built responsive Control Tower features with Nuxt.js and Vue.js",
+      "Defined integration boundaries using Domain-Driven Design principles",
+      "Supported a micro-frontend architecture for modular, independent releases",
     ],
+    liveUrl: "https://omniflow.cx/",
     featured: true,
   },
   {
@@ -144,8 +144,8 @@ export const projects: Project[] = [
       "Led the technical implementation of the ATIB.LY redesign, combining Liferay portal extensions with a Spring Boot integration service for third-party financial data.",
     overview:
       "Served as the lead technical contact for the banking portal redesign, coordinating with stakeholders and business analysts. Built the synchronization microservice and delivered Liferay extensions, themes, and Content Security Policy configuration.",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&q=80",
+    image: "/projects/atib-bank-homepage.png",
+    imageFit: "contain",
     tags: ["Java", "Spring Boot", "Liferay DXP", "REST APIs"],
     year: "2026",
     role: "Java / Liferay Developer",
@@ -155,7 +155,7 @@ export const projects: Project[] = [
       "Delivered Liferay extensions and portal themes",
       "Configured Content Security Policy requirements",
     ],
-    visual: "banking",
+    liveUrl: "https://atib.ly/home",
   },
   {
     slug: "orange-max-it",
