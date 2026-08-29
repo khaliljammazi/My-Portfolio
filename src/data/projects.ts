@@ -165,8 +165,8 @@ export const projects: Project[] = [
       "Built a responsive back-office platform for the Maxit Orange Control Tower using Nuxt.js and Vue.js, with clearly defined business and integration boundaries.",
     overview:
       "The platform uses Domain-Driven Design and a micro-frontend architecture so multiple teams can develop and release modules independently while preserving a coherent operator experience.",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&q=80",
+    image: "/projects/maxit-orange-control-tower.jpg",
+    imageFit: "contain",
     tags: ["Nuxt.js", "Vue.js", "TypeScript", "Micro-frontends"],
     year: "2025",
     role: "Front-End Developer",
@@ -176,18 +176,17 @@ export const projects: Project[] = [
       "Defined integration boundaries with business analysts",
       "Designed a micro-frontend architecture for modular releases",
     ],
-    visual: "microfrontends",
   },
   {
     slug: "embedded-bi-dashboard",
     title: "Embedded BI Dashboard",
-    shortDescription: "Responsive KPI monitoring embedded through the Qlik Sense Mashup API",
+    shortDescription: "Royal Air Maroc analytics and KPI monitoring embedded through the Qlik Sense Mashup API",
     description:
-      "Integrated Qlik Sense visualizations into a responsive web interface to make business KPIs easier to monitor and explore.",
+      "Worked on Royal Air Maroc's responsive business intelligence dashboard, integrating Qlik Sense visualizations and interactive KPI monitoring into a clear web experience.",
     overview:
-      "An embedded analytics experience built with the Qlik Sense Mashup API. Responsive layouts and interactive filters help business users move from headline indicators to detailed analysis without leaving the application.",
-    image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop&q=80",
+      "Built for Royal Air Maroc, this embedded analytics experience uses the Qlik Sense Mashup API to present operational indicators, revenue trends, traffic comparisons, and business reporting. Responsive layouts and interactive filters help users move from headline KPIs to detailed analysis.",
+    image: "/projects/embedded-bi-dashboard.png",
+    imageFit: "contain",
     tags: ["Qlik Sense", "Mashup API", "JavaScript", "Responsive UI"],
     year: "2022 - 2025",
     role: "Front-End Developer - BI Dashboard",
@@ -197,6 +196,5 @@ export const projects: Project[] = [
       "Added interactive filters for business analysis",
       "Simplified KPI monitoring inside the web application",
     ],
-    visual: "analytics",
   },
 ];
