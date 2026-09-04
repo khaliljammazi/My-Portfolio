@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@blossom-carousel/react/style.css";
-import "lenis/dist/lenis.css";
 import { PillNav } from "./components/PillNav";
 import { DeferredChatBot } from "./components/DeferredChatBot";
 import { Footer } from "./components/Footer";
@@ -11,7 +10,6 @@ import { MusicPlayer } from "./components/MusicPlayer";
 import { MusicProvider } from "./context/MusicContext";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { SmoothScroll } from "./components/SmoothScroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -135,18 +133,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SmoothScroll>
-          <ThemeProvider>
-            <MusicProvider>
-              <LoadingScreen />
-              <PillNav />
-              {children}
-              <Footer />
-              <DeferredChatBot />
-              <MusicPlayer />
-            </MusicProvider>
-          </ThemeProvider>
-        </SmoothScroll>
+        <ThemeProvider>
+          <MusicProvider>
+            <LoadingScreen />
+            <PillNav />
+            {children}
+            <Footer />
+            <DeferredChatBot />
+            <MusicPlayer />
+          </MusicProvider>
+        </ThemeProvider>
         <SpeedInsights />
       </body>
     </html>

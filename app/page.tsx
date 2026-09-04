@@ -3,7 +3,6 @@ import Projects from "./page/Projects";
 import { AboutSection } from "./components/AboutSection";
 import { BrandsSection } from "./components/BrandsSection";
 import { Metadata } from "next";
-import { EditorialIntro } from "./components/EditorialIntro";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -18,7 +17,6 @@ export default function Home() {
   return (
     <main> 
       <Hero />
-      <EditorialIntro />
       <AboutSection />
       <section className="min-h-screen flex items-center justify-center">
         <Projects />

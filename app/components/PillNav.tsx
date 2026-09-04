@@ -39,7 +39,6 @@ export function PillNav() {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const overDarkHero = pathname === "/" && !scrolled;
 
   useEffect(() => {
     setMounted(true);
@@ -182,8 +181,7 @@ export function PillNav() {
             href="/"
             className={cn(
               "font-bold tracking-tighter transition-all duration-500 z-10",
-              scrolled ? "text-lg md:text-2xl" : "text-2xl md:text-4xl",
-              overDarkHero && "text-white"
+              scrolled ? "text-lg md:text-2xl" : "text-2xl md:text-4xl"
             )}
           >
             Jammazi Khalil
@@ -214,7 +212,7 @@ export function PillNav() {
                       "relative z-10 transition-colors duration-300",
                       active || hoveredIndex === i
                         ? "text-primary-foreground"
-                        : overDarkHero ? "text-white/70" : "text-foreground/70"
+                        : "text-foreground/70"
                     )}
                   >
                     {item.label}
@@ -224,7 +222,7 @@ export function PillNav() {
             })}
 
             <div className="ml-4 md:ml-10 flex items-center gap-3 md:gap-4">
-              <div className={overDarkHero ? "text-white" : undefined}><ThemeToggle /></div>
+              <ThemeToggle />
               <Link
                 href="/resume"
                 className={cn(
@@ -241,11 +239,11 @@ export function PillNav() {
 
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-2 md:gap-4">
-            <div className={overDarkHero ? "text-white" : undefined}><ThemeToggle /></div>
+            <ThemeToggle />
             <button
               ref={menuButtonRef}
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={cn("p-1.5 md:p-2 z-50", overDarkHero && "text-white")}
+              className="p-1.5 md:p-2 z-50"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"
