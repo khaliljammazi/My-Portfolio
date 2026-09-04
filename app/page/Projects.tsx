@@ -46,7 +46,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" data-scroll-section="Work" aria-labelledby="projects-title" className="projects-section">
+    <section id="projects" aria-labelledby="projects-title" className="projects-section">
       <div className="projects-glow projects-glow-left" aria-hidden="true" />
       <div className="projects-glow projects-glow-right" aria-hidden="true" />
 
@@ -76,7 +76,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <BlossomCarousel key={filter} id={carouselId} as="ul" className="projects-cover-flow" aria-label={`${filter} projects`} onScroll={trackActiveProject} data-lenis-prevent-wheel>
+      <BlossomCarousel key={filter} id={carouselId} as="ul" className="projects-cover-flow" aria-label={`${filter} projects`} onScroll={trackActiveProject}>
         {visibleProjects.map((project) => (
           <li key={project.slug} data-blossom-slide className="project-cover-item">
             <div className="project-cover-slide">

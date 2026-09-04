@@ -6,11 +6,9 @@ import LiquidEther from "./LiquidEther";
 import { ArrowDown, Code2, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useLenis } from "lenis/react";
 
 export function Hero() {
   const { resolvedTheme } = useTheme();
-  const lenis = useLenis();
   const reduceMotion = useReducedMotion();
   const isDark = resolvedTheme !== "light";
   const liquidColors = isDark
@@ -24,8 +22,7 @@ export function Hero() {
 
   return (
     <section 
-      className="hero-experience w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
-      data-scroll-section="Intro"
+      className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
       aria-label="Hero section - Introduction"
     >
         {reduceMotion ? (
@@ -33,21 +30,9 @@ export function Hero() {
         ) : (
           <LiquidEther colors={liquidColors} />
         )}
-
-        <div className="hero-grid" aria-hidden="true" />
-        <p className="hero-watermark" aria-hidden="true">JAMMAZI</p>
-        <div className="hero-corner hero-corner-left" aria-hidden="true">
-          <span>01</span>
-          <i />
-          <span>04</span>
-        </div>
-        <div className="hero-corner hero-corner-right" aria-hidden="true">
-          <span>TUNIS</span>
-          <span>REMOTE / WORLDWIDE</span>
-        </div>
         
         {/* Main Content */}
-        <div className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 md:gap-6 max-w-4xl px-4 md:px-6 w-full">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 md:gap-6 max-w-4xl px-4 md:px-6 w-full">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -120,14 +105,14 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="absolute z-10 bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-          onClick={() => lenis?.scrollTo("#about", { offset: -72 })}
+          className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
+          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
           role="button"
           aria-label="Scroll down to view more content"
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-              lenis?.scrollTo("#about", { offset: -72 });
+              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
             }
           }}
         >
