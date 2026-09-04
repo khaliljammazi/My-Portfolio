@@ -1,154 +1,116 @@
 "use client";
 
+import Image from "next/image";
+import { ArrowDown, Sparkles } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { Button } from "../ui/Button";
 import BlurText from "./BlurText";
-import LiquidEther from "./LiquidEther";
-import { ArrowDown, Code2, Sparkles } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
+import "./hero.css";
 
 export function Hero() {
-  const { resolvedTheme } = useTheme();
   const reduceMotion = useReducedMotion();
-  const isDark = resolvedTheme !== "light";
-  const liquidColors = isDark
-    ? ["#ef4444", "#f87171", "#dc2626"]
-    : ["#1e3a8a", "#1d4ed8", "#3b82f6"];
-
-  const stats = [
-    { label: "Years building products", value: "4+" },
-    { label: "Core specialities", value: "Web · Data" }
-  ];
+  const { scrollYProgress } = useScroll();
+  const sculptureY = useTransform(scrollYProgress, [0, 0.28], ["0%", "22%"]);
+  const sculptureRotate = useTransform(scrollYProgress, [0, 0.28], [0, 7]);
 
   return (
-    <section 
-      className="w-full h-screen relative flex items-center justify-center bg-[hsl(var(--background))] overflow-hidden"
-      aria-label="Hero section - Introduction"
-    >
-        {reduceMotion ? (
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,var(--brand-soft-2),transparent_55%)]" aria-hidden="true" />
-        ) : (
-          <LiquidEther colors={liquidColors} />
-        )}
-        
-        {/* Main Content */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-4 md:gap-6 max-w-4xl px-4 md:px-6 w-full">
-          {/* Badge */}
+    <section className="hero-editorial" aria-labelledby="hero-title">
+      <div className="hero-stars" aria-hidden="true" />
+      <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
+      <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
+
+      <div className="hero-editorial-shell">
+        <div className="hero-editorial-copy">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-[hsl(var(--card))]/80 backdrop-blur-sm border border-[hsl(var(--border))] shadow-lg"
-            role="status"
-            aria-label="Currently available for freelance work"
+            className="hero-availability"
           >
-            <Sparkles className="w-3 md:w-4 h-3 md:h-4 text-[var(--secondary)]" aria-hidden="true" />
-            <span className="text-xs md:text-sm font-medium text-[hsl(var(--foreground))]">Available for freelance work</span>
+            <Sparkles aria-hidden="true" />
+            <span>Available for selected projects</span>
           </motion.div>
 
-          <h1 className="sr-only">Jammazi Khalil — Full-Stack Developer building scalable digital products</h1>
-          
-          <BlurText
-            text="I build digital products that perform."
-            delay={150}
-            animateBy="words"
-            direction="bottom"
-            className="text-[hsl(var(--foreground))] text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-center w-full px-2"
-          />
-          
-          <BlurText
-            text="I'm Jammazi Khalil, a full-stack developer creating scalable web platforms, interactive experiences, and enterprise applications."
-            delay={200}
-            animateBy="words"
-            className="text-[hsl(var(--muted-foreground))] text-base sm:text-lg md:text-xl lg:text-2xl max-w-2xl text-center leading-relaxed px-2"
-          />
+          <p className="hero-eyebrow">Frontend / Full-Stack · Tunis, Tunisia</p>
+          <h1 id="hero-title" className="sr-only">
+            Mohamed Khalil Jammazi — I build digital products that perform.
+          </h1>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-4 md:mt-6 w-full sm:w-auto px-4 sm:px-0"
+          <div className="hero-display" aria-hidden="true">
+            <BlurText
+              text="I build digital products"
+              delay={110}
+              animateBy="words"
+              direction="bottom"
+              className="hero-display-line"
+            />
+            <motion.div
+              initial={{ clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)" }}
+              transition={{ delay: 0.45, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="hero-display-accent"
+            >
+              that perform.
+            </motion.div>
+          </div>
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 0.55, duration: 0.65 }}
+            className="hero-editorial-description"
           >
-            <Button variant="primary" linkHref="#projects">
-              View My Work
-            </Button>
-            <Button variant="outline" linkHref="/contact">
-              Contact Me
-            </Button>
-          </motion.div>
+            Enterprise portals, micro-frontends, API integrations and interactive experiences—built from interface to infrastructure.
+          </motion.p>
 
-          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex gap-6 sm:gap-8 mt-8 md:mt-12 flex-wrap justify-center"
-            role="region"
-            aria-label="Professional statistics"
+            transition={{ delay: 0.7, duration: 0.65 }}
+            className="hero-editorial-actions"
           >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-[var(--secondary)] to-[hsl(var(--primary))] bg-clip-text text-transparent">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-[hsl(var(--muted-foreground))] mt-1">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+            <Button variant="primary" linkHref="#projects" className="!bg-none !bg-[#ff6b72] !text-black">
+              View selected work
+            </Button>
+            <Button variant="outline" linkHref="/contact" className="!border-white/30 !text-white hover:!border-[#ff6b72]">
+              Start a conversation
+            </Button>
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer"
-          onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-          role="button"
-          aria-label="Scroll down to view more content"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            }
-          }}
+          initial={{ opacity: 0, scale: 0.86, rotate: -4 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ delay: 0.2, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          style={reduceMotion ? undefined : { y: sculptureY, rotate: sculptureRotate }}
+          className="hero-sculpture"
+          aria-hidden="true"
         >
-          <span className="text-xs md:text-sm text-[hsl(var(--muted-foreground))]">Scroll to explore</span>
-          <motion.div
-            animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            <ArrowDown className="w-4 md:w-5 h-4 md:h-5 text-[hsl(var(--muted-foreground))]" aria-hidden="true" />
-          </motion.div>
+          <div className="hero-sculpture-glow" />
+          <Image
+            src="/img/hero-code-sculpture.png"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 88vw, 48vw"
+            className="object-contain mix-blend-screen"
+            priority
+          />
+          <span className="hero-sculpture-label hero-sculpture-label-top">Digital systems</span>
+          <span className="hero-sculpture-label hero-sculpture-label-bottom">Built end to end</span>
         </motion.div>
+      </div>
 
-        {/* Floating Icons - Hidden on mobile */}
-        <motion.div
-          animate={reduceMotion ? undefined : {
-            y: [0, -20, 0],
-            rotate: [0, 10, 0]
-          }}
-          transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-          className="hidden md:block absolute top-1/4 left-[10%] opacity-20"
-          aria-hidden="true"
-        >
-          <Code2 className="w-12 lg:w-16 h-12 lg:h-16 text-[var(--secondary)]" />
-        </motion.div>
-        
-        <motion.div
-          animate={reduceMotion ? undefined : {
-            y: [0, 20, 0],
-            rotate: [0, -10, 0]
-          }}
-          transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-          className="hidden md:block absolute bottom-1/4 right-[10%] opacity-20"
-          aria-hidden="true"
-        >
-          <Code2 className="w-16 lg:w-20 h-16 lg:h-20 text-[hsl(var(--primary))]" />
-        </motion.div>
+      <div className="hero-proof" aria-label="Professional highlights">
+        <div><strong>4+</strong><span>Years delivering</span></div>
+        <div><strong>30M+</strong><span>Monthly visitors</span></div>
+        <div><strong>50+</strong><span>APIs integrated</span></div>
+        <div><strong>03</strong><span>Working languages</span></div>
+      </div>
+
+      <a href="#editorial-intro" className="hero-scroll-cue" aria-label="Scroll to explore">
+        <span>Scroll to explore</span>
+        <ArrowDown aria-hidden="true" />
+      </a>
     </section>
   );
 }
