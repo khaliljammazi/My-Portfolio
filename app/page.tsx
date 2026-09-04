@@ -3,6 +3,7 @@ import Projects from "./page/Projects";
 import { AboutSection } from "./components/AboutSection";
 import { BrandsSection } from "./components/BrandsSection";
 import { Metadata } from "next";
+import { ScrollReveal } from "./components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -17,11 +18,17 @@ export default function Home() {
   return (
     <main> 
       <Hero />
-      <AboutSection />
-      <section className="min-h-screen flex items-center justify-center">
-        <Projects />
-      </section>
-      <BrandsSection />
+      <ScrollReveal>
+        <AboutSection />
+      </ScrollReveal>
+      <ScrollReveal delay={0.05}>
+        <section className="min-h-screen flex items-center justify-center">
+          <Projects />
+        </section>
+      </ScrollReveal>
+      <ScrollReveal>
+        <BrandsSection />
+      </ScrollReveal>
     </main>
 
   );
