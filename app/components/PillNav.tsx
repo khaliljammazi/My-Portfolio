@@ -1,13 +1,14 @@
 // src/components/PillNav.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
+import { useLenis } from "lenis/react";
 
 const navItems = [
   { label: "Work", href: "/#projects" },
@@ -15,10 +16,79 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
+const subscribeToHydration = () => () => undefined;
+
+function ThemeToggle() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const mounted = useSyncExternalStore(subscribeToHydration, () => true, () => false);
+
+  if (!mounted) {
+    return (
+      <div className="p-2 w-9 h-9" aria-label="Loading theme toggle">
+        <div className="w-5 h-5" />
+      </div>
+    );
+  }
+
+  const toggleTheme = () => {
+    const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const documentWithTransitions = document as Document & {
+      startViewTransition?: (update: () => void) => { finished: Promise<void> };
+    };
+
+    const switchTheme = () => flushSync(() => setTheme(nextTheme));
+
+    if (!documentWithTransitions.startViewTransition || reduceMotion) {
+      switchTheme();
+      return;
+    }
+
+    documentWithTransitions.startViewTransition(switchTheme);
+  };
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className="p-2 rounded-full hover:bg-accent transition-colors"
+      aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}
+      title="Change theme"
+    >
+      {resolvedTheme === "dark" ? (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+      ) : (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function Hamburger() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+      <path d="M4 7H24M4 14H24M4 21H24" />
+    </svg>
+  );
+}
+
+function Close() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+      <path d="M7 7L21 21M7 21L21 7" />
+    </svg>
+  );
+}
+
 const smoothScrollToSection = (
   e: React.MouseEvent<HTMLAnchorElement>,
   href: string,
-  pathname: string
+  pathname: string,
+  scrollTo?: (target: string, options?: { offset?: number }) => void
 ) => {
   if (!href.startsWith("/#")) return;
   if (pathname !== "/") return;
@@ -26,23 +96,19 @@ const smoothScrollToSection = (
   const targetId = href.substring(2);
   const element = document.getElementById(targetId);
   if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scrollTo) scrollTo(`#${targetId}`, { offset: -84 });
+    else element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
 
 export function PillNav() {
   const pathname = usePathname();
+  const lenis = useLenis();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -89,65 +155,6 @@ export function PillNav() {
     if (href.startsWith("/#")) return activeSection === href.substring(2);
     return pathname === href;
   };
-
-  const ThemeToggle = () => {
-    if (!mounted) {
-      return (
-        <div className="p-2 w-9 h-9" aria-label="Loading theme toggle">
-          <div className="w-5 h-5" />
-        </div>
-      );
-    }
-
-    const toggleTheme = () => {
-      const nextTheme = resolvedTheme === "dark" ? "light" : "dark";
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const documentWithTransitions = document as Document & {
-        startViewTransition?: (update: () => void) => { finished: Promise<void> };
-      };
-
-      const switchTheme = () => flushSync(() => setTheme(nextTheme));
-
-      if (!documentWithTransitions.startViewTransition || reduceMotion) {
-        switchTheme();
-        return;
-      }
-
-      documentWithTransitions.startViewTransition(switchTheme);
-    };
-
-    return (
-      <button
-        onClick={toggleTheme}
-        className="p-2 rounded-full hover:bg-accent transition-colors"
-        aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}
-        title="Change theme"
-      >
-        {resolvedTheme === "dark" ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-          </svg>
-        ) : (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        )}
-      </button>
-    );
-  };
-
-  const Hamburger = () => (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-      <path d="M4 7H24M4 14H24M4 21H24" />
-    </svg>
-  );
-
-  const Close = () => (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-      <path d="M7 7L21 21M7 21L21 7" />
-    </svg>
-  );
 
   return (
     <>
@@ -198,7 +205,7 @@ export function PillNav() {
                   className="relative px-4 md:px-7 py-2.5 md:py-3.5 text-base md:text-lg font-medium"
                   onMouseEnter={() => setHoveredIndex(i)}
                   onMouseLeave={() => setHoveredIndex(null)}
-                  onClick={(e) => smoothScrollToSection(e, item.href, pathname)}
+                  onClick={(e) => smoothScrollToSection(e, item.href, pathname, lenis?.scrollTo.bind(lenis))}
                 >
                   {(active || hoveredIndex === i) && (
                     <motion.div
@@ -269,7 +276,7 @@ export function PillNav() {
                 key={item.href}
                 href={item.href}
                   onClick={(e) => {
-                    smoothScrollToSection(e, item.href, pathname);
+                    smoothScrollToSection(e, item.href, pathname, lenis?.scrollTo.bind(lenis));
                     setMobileOpen(false);
                   }}
                 className={cn(

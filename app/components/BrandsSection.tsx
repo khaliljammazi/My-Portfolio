@@ -38,7 +38,7 @@ export function BrandsSection() {
 
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden">
+    <section data-scroll-section="Clients" className="py-16 md:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <motion.div

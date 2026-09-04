@@ -67,7 +67,7 @@ export function AboutSection() {
   const duplicatedStack = [...techStack, ...techStack];
 
   return (
-    <section ref={sectionRef} id="about" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden">
+    <section ref={sectionRef} id="about" data-scroll-section="About" className="py-12 md:py-24 px-4 md:px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
