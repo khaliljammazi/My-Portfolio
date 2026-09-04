@@ -167,77 +167,10 @@ html {
   scroll-behavior: smooth;
 }
 
-html.lenis {
-  scroll-behavior: auto;
-}
-
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-sans, ui-sans-serif);
-}
-
-/* Subtle Lenis scroll atmosphere */
-.scroll-atmosphere {
-  position: fixed;
-  z-index: 0;
-  inset: 0;
-  overflow: hidden;
-  opacity: .5;
-  pointer-events: none;
-}
-
-.scroll-atmosphere-beam,
-.scroll-atmosphere-halo {
-  position: absolute;
-  display: block;
-  border-radius: 999px;
-  will-change: transform, opacity;
-}
-
-.scroll-atmosphere-beam {
-  top: -45vh;
-  left: 12vw;
-  width: clamp(5rem, 10vw, 10rem);
-  height: 95vh;
-  background: linear-gradient(to bottom, transparent, var(--brand-soft-1), transparent);
-  filter: blur(36px);
-}
-
-.scroll-atmosphere-halo {
-  right: -18vw;
-  bottom: -35vh;
-  width: min(58rem, 78vw);
-  aspect-ratio: 1;
-  background: radial-gradient(circle, var(--brand-soft-2), transparent 68%);
-  filter: blur(70px);
-}
-
-.scroll-reveal-shell {
-  position: relative;
-  z-index: 1;
-  isolation: isolate;
-  will-change: transform, opacity, filter;
-}
-
-.scroll-reveal-glow {
-  position: absolute;
-  z-index: -1;
-  top: 8%;
-  left: 50%;
-  width: min(42rem, 72vw);
-  height: 14rem;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, var(--brand-soft-1), transparent 70%);
-  filter: blur(60px);
-  opacity: .38;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-atmosphere { display: none; }
-  .scroll-reveal-shell { filter: none !important; transform: none !important; }
 }
 
 .contact-quick-link { display: flex; align-items: center; gap: .75rem; min-width: 0; padding: .9rem; border: 1px solid hsl(var(--border)); border-radius: 1rem; background: hsl(var(--card)); transition: transform .2s, border-color .2s; }
