@@ -3,7 +3,7 @@ import Projects from "./page/Projects";
 import { AboutSection } from "./components/AboutSection";
 import { BrandsSection } from "./components/BrandsSection";
 import { Metadata } from "next";
-
+import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: "Home",
   description: "Mohamed Khalil Jammazi is a front-end and full-stack developer building high-traffic telecom portals, banking integrations, micro-frontends, and enterprise applications.",
@@ -22,6 +22,7 @@ export default function Home() {
         <Projects />
       </section>
       <BrandsSection />
+      <Analytics />
     </main>
 
   );
